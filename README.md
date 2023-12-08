@@ -26,3 +26,9 @@ The submission involves several steps. First, you need to create your design(s) 
  - Create a <a href="https://help.github.com/articles/using-pull-requests/">Pull Request</a> -- this will notify the team of your contribution, which we can aggregate into the main design file
  - Return to the main repository, and check for the merged design
 
+## Automated GitHub Actions
+
+1) Running the files in the "submissions/KLayout Python" folder, to generate the designs
+2) Performing Manufacturing DRC verification on the designs in the "submissions" folder, and outputing the errors as an Artifact
+3) Performing Functional verification on the designs in the "submissions" folder, and outputing the errors as an Artifact
+4) Merging the designs from the "submissions" folder, and outputing merged layout as an Artifact

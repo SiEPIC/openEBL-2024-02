@@ -42,11 +42,8 @@ filename = gds_file.split(".")[0]
 file_lyrdb = os.path.join(path,filename+'.lyrdb')
 
 # run verification
-print('SiEPIC_EBeam_PDK: {} - verification'.format(gds_file))
 num_errors = layout_check(cell = top_cell, verbose=True, GUI=True, file_rdb=file_lyrdb)
-print('SiEPIC_EBeam_PDK: {} - done'.format(gds_file))
 
 # Print the result value to standard output
-print(f"::set-output name=result::{num_errors}")
-
+print(num_errors)
 

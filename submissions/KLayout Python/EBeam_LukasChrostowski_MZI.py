@@ -36,7 +36,7 @@ if Python_Env == 'Script':
         # Load the PDK from a folder, e.g, GitHub, when running externally from the KLayout Application
         import os, sys
         path_GitHub = os.path.expanduser('~/Documents/GitHub/')
-        sys.path.append(os.path.join(path_GitHub, 'SiEPIC_EBeam_PDK/klayout'))
+        sys.path.insert(0,os.path.join(path_GitHub, 'SiEPIC_EBeam_PDK/klayout'))
         import siepic_ebeam_pdk
 
 tech_name = 'EBeam'
@@ -56,11 +56,12 @@ dbu = ly.dbu
 
 from SiEPIC.scripts import connect_pins_with_waveguide, connect_cell
 waveguide_type='Strip TE 1550 nm, w=500 nm'
+waveguide_type_delay='Si routing TE 1550 nm (compound waveguide)'
 
 # Load cells from library
 cell_ebeam_gc = ly.create_cell('GC_TE_1550_8degOxide_BB', tech_name)
 cell_ebeam_y = ly.create_cell('ebeam_y_1550', tech_name)
-cell_ebeam_y_dream = ly.create_cell('ebeam_dream_splitter_1x2_te1550_BB', 'EBeam-Dream', {})
+cell_ebeam_y_dream = ly.create_cell('ebeam_dream_splitter_1x2_te1550_BB', 'EBeam-Dream',{})
 
 # grating couplers, place at absolute positions
 x,y = 60000, 15000
@@ -115,7 +116,9 @@ connect_pins_with_waveguide(instY1, 'opt2', instY2, 'opt3', waveguide_type=waveg
 connect_pins_with_waveguide(instY1, 'opt3', instY2, 'opt2', waveguide_type=waveguide_type,turtle_B=[25,-90])
 
 # 3rd MZI, with a very long delay line
-cell_ebeam_delay = ly.create_cell('spiral_paperclip', 'EBeam_Beta',{})
+cell_ebeam_delay = ly.create_cell('spiral_paperclip', 'EBeam_Beta',
+                                  {'waveguide_type':waveguide_type_delay,
+                                   'length':200})
 x,y = 60000, 175000
 t = Trans(Trans.R0,x,y)
 instGC1 = cell.insert(CellInstArray(cell_ebeam_gc.cell_index(), t))
@@ -132,12 +135,16 @@ instY1.transform(Trans(20000,0))
 instY2 = connect_cell(instGC2, 'opt1', cell_ebeam_y_dream, 'opt1')
 instY2.transform(Trans(20000,0))
 
-# Waveguides:
+# Spiral:
+instSpiral = connect_cell(instY2, 'opt2', cell_ebeam_delay, 'optA')
+instSpiral.transform(Trans(20000,0))
 
+# Waveguides:
 connect_pins_with_waveguide(instGC1, 'opt1', instY1, 'opt1', waveguide_type=waveguide_type)
 connect_pins_with_waveguide(instGC2, 'opt1', instY2, 'opt1', waveguide_type=waveguide_type)
 connect_pins_with_waveguide(instY1, 'opt2', instY2, 'opt3', waveguide_type=waveguide_type)
-connect_pins_with_waveguide(instY1, 'opt3', instY2, 'opt2', waveguide_type=waveguide_type,turtle_B=[25,-90])
+connect_pins_with_waveguide(instY2, 'opt2', instSpiral, 'optA', waveguide_type=waveguide_type)
+connect_pins_with_waveguide(instY1, 'opt3', instSpiral, 'optB', waveguide_type=waveguide_type,turtle_B=[5,-90])
 
 
 # Zoom out

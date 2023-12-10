@@ -25,7 +25,7 @@ if Python_Env == 'Script':
         # Load the PDK from a folder, e.g, GitHub, when running externally from the KLayout Application
         import os, sys
         path_GitHub = os.path.expanduser('~/Documents/GitHub/')
-        sys.path.append(os.path.join(path_GitHub, 'SiEPIC_EBeam_PDK/klayout'))
+        sys.path.insert(0,os.path.join(path_GitHub, 'SiEPIC_EBeam_PDK/klayout'))
         import siepic_ebeam_pdk
 
 tech_name = 'EBeam'

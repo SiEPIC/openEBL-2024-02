@@ -107,6 +107,12 @@ _, _, files = next(os.walk(path2), (None, None, []))
 for f in sorted(files):
     files_in.append(os.path.join(path2,f))
 
+# Load all the GDS/OAS files from the "framework" folder:
+path2 = os.path.abspath(os.path.join(path,"../framework"))
+_, _, files = next(os.walk(path2), (None, None, []))
+for f in sorted(files):
+    files_in.append(os.path.join(path2,f))
+
 # Create course cells using the folder name under the top cell
 cell_edXphot1x = layout.create_cell("edX")
 t = Trans(Trans.R0, 0,0)

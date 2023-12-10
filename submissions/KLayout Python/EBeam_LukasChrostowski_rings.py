@@ -5,6 +5,8 @@ in the SiEPIC-EBeam-PDK "EBeam" technology
 by Lukas Chrostowski, 2023
 '''
 
+top_cell_name = 'EBeam_LukasChrostowski_rings'
+
 import pya
 from pya import *
 
@@ -55,7 +57,7 @@ def dbl_bus_ring_res():
     with a top cell
     and Draw the floor plan
     '''    
-    cell, ly = new_layout(tech_name, 'top', GUI=True, overwrite = True)
+    cell, ly = new_layout(tech_name, top_cell_name, GUI=True, overwrite = True)
     floorplan(cell, 605e3, 410e3)
 
     if SiEPIC.__version__ < '0.5.1':

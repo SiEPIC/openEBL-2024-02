@@ -25,6 +25,7 @@ from SiEPIC._globals import Python_Env
 from SiEPIC.scripts import connect_cell, connect_pins_with_waveguide, zoom_out, export_layout
 from SiEPIC.utils.layout import new_layout, floorplan
 from SiEPIC.extend import to_itype
+from SiEPIC.verification import layout_check
 
 import os
 
@@ -99,7 +100,7 @@ t = Trans(Trans.R0,x,y+127000)
 instGC2 = cell.insert(CellInstArray(cell_ebeam_gc.cell_index(), t))
 
 # automated test label
-text = Text ("opt_in_TE_1550_device_%s_MZI2" % designer_name, t)
+text = Text ("opt_in_TE_1550_device_%s_MZI1" % designer_name, t)
 cell.shapes(ly.layer(ly.TECHNOLOGY['Text'])).insert(text).text_size = 5/dbu
 
 # Y branches:
@@ -115,10 +116,12 @@ connect_pins_with_waveguide(instGC2, 'opt1', instY2, 'opt1', waveguide_type=wave
 connect_pins_with_waveguide(instY1, 'opt2', instY2, 'opt3', waveguide_type=waveguide_type)
 connect_pins_with_waveguide(instY1, 'opt3', instY2, 'opt2', waveguide_type=waveguide_type,turtle_B=[25,-90])
 
+'''
 # 3rd MZI, with a very long delay line
 cell_ebeam_delay = ly.create_cell('spiral_paperclip', 'EBeam_Beta',
                                   {'waveguide_type':waveguide_type_delay,
-                                   'length':200})
+                                   'length':200,
+                                   'flatten':True})
 x,y = 60000, 175000
 t = Trans(Trans.R0,x,y)
 instGC1 = cell.insert(CellInstArray(cell_ebeam_gc.cell_index(), t))
@@ -145,10 +148,14 @@ connect_pins_with_waveguide(instGC2, 'opt1', instY2, 'opt1', waveguide_type=wave
 connect_pins_with_waveguide(instY1, 'opt2', instY2, 'opt3', waveguide_type=waveguide_type)
 connect_pins_with_waveguide(instY2, 'opt2', instSpiral, 'optA', waveguide_type=waveguide_type)
 connect_pins_with_waveguide(instY1, 'opt3', instSpiral, 'optB', waveguide_type=waveguide_type,turtle_B=[5,-90])
-
+'''
 
 # Zoom out
 zoom_out(cell)
+
+# Verify
+num_errors = layout_check(cell=cell, verbose=True, GUI=True)
+print(num_errors)
 
 # Save
 path = os.path.dirname(os.path.realpath(__file__))

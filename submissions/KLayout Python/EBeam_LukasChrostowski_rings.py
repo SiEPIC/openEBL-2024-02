@@ -5,7 +5,8 @@ in the SiEPIC-EBeam-PDK "EBeam" technology
 by Lukas Chrostowski, 2023
 '''
 
-top_cell_name = 'EBeam_LukasChrostowski_rings'
+designer_name = 'LukasChrostowski'
+top_cell_name = 'EBeam_%s_rings' % designer_name
 
 import pya
 from pya import *
@@ -107,7 +108,7 @@ def dbl_bus_ring_res():
         
         # Label for automated measurements, laser on Port 2, detectors on Ports 1, 3, 4
         t = Trans(Trans.R90, to_itype(x,dbu), to_itype(GC_pitch*2,dbu))
-        text = Text ("opt_in_%s_1550_device_RingDouble%sr%sg%s" % (pol.upper(), pol.upper(),r,int(round(g*1000))), t)
+        text = Text ("opt_in_%s_1550_device_%s_RingDouble%sr%sg%s" % (pol.upper(), designer_name, pol.upper(),r,int(round(g*1000))), t)
         text.halign = 1
         cell.shapes(TextLayerN).insert(text).text_size = 5/dbu
                   

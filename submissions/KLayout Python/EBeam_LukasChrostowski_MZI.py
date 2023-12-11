@@ -154,8 +154,8 @@ connect_pins_with_waveguide(instY1, 'opt3', instSpiral, 'optB', waveguide_type=w
 zoom_out(cell)
 
 # Verify
-num_errors = layout_check(cell=cell, verbose=True, GUI=True)
-print(num_errors)
+num_errors = layout_check(cell=cell, verbose=False, GUI=True)
+print('Number of errors: %s' % num_errors)
 
 # Save
 path = os.path.dirname(os.path.realpath(__file__))

@@ -277,7 +277,7 @@ coords_file.close()
 # Export as-is layout, for UW fabrication
 log('')
 
-export_layout (top_cell, path, filename='EBeam', relative_path='', format='gds')
+#export_layout (top_cell, path, filename='EBeam', relative_path='', format='gds')
 export_layout (top_cell, path, filename='EBeam', relative_path='', format='oas')
 # log("Layout exported successfully %s: %s" % (save_options.format, file_out) )
 

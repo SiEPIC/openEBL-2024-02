@@ -36,7 +36,8 @@ jobs:
         run: |
         
           #locate the .gds and .oas files 
-          export FILES=$(find submissions -type f \( -name "*.gds" -o -name "*.oas" \)  -exec basename {} \;)
+          #export FILES=$(find submissions -type f \( -name "*.gds" -o -name "*.oas" \)  -exec basename {} \;)
+          export FILES=$(git diff --name-status --diff-filter=ACM ${{ github.event.before }} ${{ github.sha }} submissions | grep -E '\.(gds|oas)$' | awk '{print $2}')
 
           # print the names of the files
           echo "Files for verification: $FILES"

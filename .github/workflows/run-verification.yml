@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: checkout repo content
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
         # can also specify python version if needed
       - name: setup python
@@ -35,8 +37,8 @@ jobs:
         id: run-script
         run: |
         
-          #locate the .gds and .oas files 
-          export FILES=$(find submissions -type f \( -name "*.gds" -o -name "*.oas" \)  -exec basename {} \;)
+          #locate the changed / added .gds and .oas files in the submission folder
+          export FILES=$(git diff --name-status --diff-filter=ACM --relative=submissions ${{ github.event.before }} ${{ github.sha }} submissions | grep -E '\.(gds|oas)$' | awk '{print $2}')
 
           # print the names of the files
           echo "Files for verification: $FILES"

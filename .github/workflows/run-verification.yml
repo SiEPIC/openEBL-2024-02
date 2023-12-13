@@ -2,6 +2,10 @@ name: Run Layout Verification
 
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Run Python Files"]
+    types:
+      - completed
   push:
     paths:
       - 'submissions/**.gds'
@@ -37,15 +41,22 @@ jobs:
         id: run-script
         run: |
         
-          #locate the changed / added .gds and .oas files in the submission folder
-          export FILES=$(git diff --name-status --diff-filter=ACM --relative=submissions ${{ github.event.before }} ${{ github.sha }} submissions | grep -E '\.(gds|oas)$' | awk '{print $2}')
+          # if the action is being triggered after running python files, get resulting oas files from txt file
+          # github actions is not configured to detect files pushed from another action, thus we cannot use the method below
+          if [ -s "python-to-gds_oas.txt" ]; then
+             export FILES=$(cat python-to-gds_oas.txt)
+             IFS=' '
+             echo "" > python-to-gds_oas.txt
+          else
+            #locate the changed / added .gds and .oas files in the submission folder
+            export FILES=$(git diff --name-status --diff-filter=ACM --relative=submissions ${{ github.event.before }} ${{ github.sha }} submissions | grep -E '\.(gds|oas)$' | awk '{print $2}')
+            IFS=$'\n'
+          fi
 
           # print the names of the files
-          echo "Files for verification: $FILES"
+          echo "Files for verification; $FILES"
 
           files_with_errors=""
-
-          IFS=$'\n'
         
           # run verification on all files
           for file in $FILES; do
@@ -68,6 +79,14 @@ jobs:
           done
 
           echo "files_with_errors=$files_with_errors" >> $GITHUB_ENV
+
+      - name: push emptied text files into repository
+        run: |
+          git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --local user.name "${{ github.actor }}"
+          git add python-to-gds_oas.txt
+          git commit -m "Emptying text file" 
+          git push
 
       - name: move output files to new folder
         run: |

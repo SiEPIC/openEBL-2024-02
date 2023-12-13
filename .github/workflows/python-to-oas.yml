@@ -1,0 +1,85 @@
+name: Run Python Files
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "submissions/KLayout Python/**.py"
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+
+jobs:
+  run-python:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+        # can also specify python version if needed
+      - name: setup python
+        uses: actions/setup-python@v4
+
+      - name: install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install klayout SiEPIC siepic_ebeam_pdk
+          python -m pip install --upgrade SiEPIC
+
+      - name: get python scripts
+        run: |
+
+          # get added/modified py files
+          export FILES=$(git diff --name-only --diff-filter=ACM ${{ github.event.before }} ${{ github.sha }} -- "submissions/KLayout Python" | grep -E '\.py$')
+
+          echo "Added / modified Python files; $FILES"
+
+          IFS=$'\n'
+        
+          OAS_FILES=""
+          # run all python files to get oas output
+          for file in $FILES; do
+
+            file_name=$(basename "$file")
+            oas_file="${file_name%.py}.oas"
+            OAS_FILES+="$oas_file "
+
+            echo "Getting oas output for $file"
+
+            python "$file" 
+
+            echo "Done for $file"
+
+          done
+
+          echo "oas files; $OAS_FILES"
+
+          echo "OAS_FILES=$OAS_FILES" >> $GITHUB_ENV
+
+      - name: write added oas files to txt file
+        run: |
+          echo "$OAS_FILES" > python-to-gds_oas.txt
+
+      - name: commit outputted oas files into repository
+        run: |
+          git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --local user.name "${{ github.actor }}"
+
+          git add python-to-gds_oas.txt
+
+          echo "git add python-to-gds_oas.txt"
+          
+          # git add all produced oas files
+          for file in $OAS_FILES; do
+            git add "submissions/$file"
+            echo "git add $file"
+          done
+
+          git commit -m "Add oas files produced from .py files" 
+          git push

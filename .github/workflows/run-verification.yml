@@ -47,6 +47,7 @@ jobs:
              export FILES=$(cat python-to-gds_oas.txt)
              IFS=' '
              echo "" > python-to-gds_oas.txt
+             echo "hello"
           else
             #locate the changed / added .gds and .oas files in the submission folder
             export FILES=$(git diff --name-status --diff-filter=ACM --relative=submissions ${{ github.event.before }} ${{ github.sha }} submissions | grep -E '\.(gds|oas)$' | awk '{print $2}')

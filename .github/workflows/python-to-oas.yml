@@ -54,6 +54,9 @@ jobs:
 
             python "$file" 
 
+            newly_added_files=$(git diff --name-only ${{ github.sha }}^ ${{ github.sha }} submissions/)
+            echo "Newly added files are $newly_added_files"
+
             echo "Done for $file"
 
           done

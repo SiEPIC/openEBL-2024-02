@@ -84,6 +84,7 @@ jobs:
             else
               gds_file="${file%.oas}.gds"
               git add "submissions/$gds_file"
+            fi
           done
 
           git commit -m "Add oas files produced from .py files" 

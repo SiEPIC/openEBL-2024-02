@@ -11,7 +11,7 @@ Example simple script to
 using SiEPIC-Tools function including connect_pins_with_waveguide and connect_cell
 
 usage:
- - run this script in Python
+ - run this script in Python....
 '''
 
 designer_name = 'LukasChrostowski'

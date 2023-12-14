@@ -6,7 +6,7 @@ on:
     paths:
       - "submissions/KLayout Python/**.py"
     branches:
-      - main
+      - '**'
 
 jobs:
   run-python:

@@ -54,9 +54,6 @@ jobs:
 
             python "$file" 
 
-            newly_added_files=$(git diff --name-only ${{ github.sha }}^ ${{ github.sha }} /home/runner/work/openEBL-2024-02/openEBL-2024-02/submissions)
-            echo "Newly added files; $newly_added_files"
-
             echo "Done for $file"
 
           done
@@ -80,8 +77,13 @@ jobs:
           
           # git add all produced oas files
           for file in $OAS_FILES; do
-            git add "submissions/$file"
-            echo "git add $file"
+            file_path = "submissions/$file"
+            if [ -e "$file_path" ];then
+              git add "$file_path"
+              echo "git add $file"
+            else
+              gds_file="${file%.oas}.gds"
+              git add "submissions/$gds_file"
           done
 
           git commit -m "Add oas files produced from .py files" 

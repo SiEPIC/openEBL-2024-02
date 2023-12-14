@@ -13,6 +13,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: check if triggered by a print
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "Workflow triggered by a pull request. Don't perform merging"
+            exit 0  
+          fi
+
       - name: checkout repo content
         uses: actions/checkout@v2
 

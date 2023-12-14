@@ -77,7 +77,7 @@ jobs:
           
           # git add all produced oas files
           for file in $OAS_FILES; do
-            file_path = "submissions/$file"
+            file_path="submissions/$file"
             if [ -e "$file_path" ];then
               git add "$file_path"
               echo "git add $file"

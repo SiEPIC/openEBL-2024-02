@@ -54,8 +54,7 @@ jobs:
 
             python "$file" 
 
-            newly_added_files=$(git diff --name-only ${{ github.sha }}^ ${{ github.sha }} /home/runner/work/openEBL-2024-02/openEBL-2024-02/submissions)
-            echo "Newly added files are $newly_added_files"
+            ls -R submissions/
 
             echo "Done for $file"
 

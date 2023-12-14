@@ -7,10 +7,6 @@ on:
       - "submissions/KLayout Python/**.py"
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-
 
 jobs:
   run-python:

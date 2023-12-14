@@ -54,7 +54,7 @@ jobs:
 
             python "$file" 
 
-            ls -R .
+            ls -R /home/runner/work/openEBL-2024-02/openEBL-2024-02
 
             echo "Done for $file"
 

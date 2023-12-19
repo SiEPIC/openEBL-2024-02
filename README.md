@@ -33,7 +33,7 @@ The submission involves several steps. First, you need to create your design(s) 
 3) Performing Functional verification on the designs in the "submissions" folder, and outputing the errors as an Artifact
 4) Merging the designs from the "submissions" folder, and outputing merged layout as an Artifact
 
-## Merge Script Files
+## Latest Merge Script Files
 
 <!-- start-link -->
 https://github.com/SiEPIC/openEBL-2024-02/actions/runs/7268376821/artifacts/1125271018

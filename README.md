@@ -32,3 +32,9 @@ The submission involves several steps. First, you need to create your design(s) 
 2) Performing Manufacturing DRC verification on the designs in the "submissions" folder, and outputing the errors as an Artifact
 3) Performing Functional verification on the designs in the "submissions" folder, and outputing the errors as an Artifact
 4) Merging the designs from the "submissions" folder, and outputing merged layout as an Artifact
+
+## Merge Script Files
+
+<!-- start-link -->
+https://github.com/jasminabrar/openEBL-2024-02/actions/runs/7268154517/artifacts/1125227292
+<!-- end-link -->

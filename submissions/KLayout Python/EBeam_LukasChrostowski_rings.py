@@ -3,6 +3,14 @@ Scripted layout for ring resonators using SiEPIC-Tools
 in the SiEPIC-EBeam-PDK "EBeam" technology
 
 by Lukas Chrostowski, 2023
+
+Use instructions:
+
+Run in Python, e.g., VSCode
+
+pip install required packages:
+ - klayout, SiEPIC, siepic_ebeam_pdk, numpy
+
 '''
 
 designer_name = 'LukasChrostowski'
@@ -14,6 +22,7 @@ from pya import *
 import SiEPIC
 from SiEPIC._globals import Python_Env
 from SiEPIC.scripts import zoom_out, export_layout
+from SiEPIC.verification import layout_check
 import os
 import numpy
 
@@ -143,20 +152,24 @@ def dbl_bus_ring_res():
     
 ly, cell = dbl_bus_ring_res()
 
+# Verify
+num_errors = layout_check(cell=cell, verbose=False, GUI=True)
+print('Number of errors: %s' % num_errors)
+
 # Save
 path = os.path.dirname(os.path.realpath(__file__))
 filename = os.path.splitext(os.path.basename(__file__))[0]
 file_out = export_layout(cell, path, filename, relative_path = '..', format='oas', screenshot=True)
 
-'''
 from SiEPIC.verification import layout_check
 print('SiEPIC_EBeam_PDK: example_Ring_resonator_sweep.py - verification')
 file_lyrdb = os.path.join(path,filename+'.lyrdb')
 num_errors = layout_check(cell = cell, verbose=False, GUI=True, file_rdb=file_lyrdb)
 
+
+# Display the layout in KLayout, using KLayout Package "klive", which needs to be installed in the KLayout Application
 if Python_Env == 'Script':
     from SiEPIC.utils import klive
     klive.show(file_out, lyrdb_filename=file_lyrdb, technology=tech_name)
-'''
 
 print('SiEPIC_EBeam_PDK: example_Ring_resonator_sweep.py - done')

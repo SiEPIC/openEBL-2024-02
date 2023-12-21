@@ -10,8 +10,13 @@ Example simple script to
 
 using SiEPIC-Tools function including connect_pins_with_waveguide and connect_cell
 
-usage:
- - run this script in Python
+Use instructions:
+
+Run in Python, e.g., VSCode
+
+pip install required packages:
+ - klayout, SiEPIC, siepic_ebeam_pdk, numpy
+
 '''
 
 designer_name = 'LukasChrostowski'
@@ -151,11 +156,17 @@ connect_pins_with_waveguide(instY1, 'opt3', instSpiral, 'optB', waveguide_type=w
 # Zoom out
 zoom_out(cell)
 
-# Verify
-num_errors = layout_check(cell=cell, verbose=False, GUI=True)
-print('Number of errors: %s' % num_errors)
-
 # Save
 path = os.path.dirname(os.path.realpath(__file__))
 filename = os.path.splitext(os.path.basename(__file__))[0]
 file_out = export_layout(cell, path, filename, relative_path = '..', format='oas', screenshot=True)
+
+# Verify
+file_lyrdb = os.path.join(path,filename+'.lyrdb')
+num_errors = layout_check(cell = cell, verbose=False, GUI=True, file_rdb=file_lyrdb)
+print('Number of errors: %s' % num_errors)
+
+# Display the layout in KLayout, using KLayout Package "klive", which needs to be installed in the KLayout Application
+if Python_Env == 'Script':
+    from SiEPIC.utils import klive
+    klive.show(file_out, lyrdb_filename=file_lyrdb, technology=tech_name)

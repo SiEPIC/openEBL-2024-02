@@ -5,6 +5,25 @@
 - More details about <a href="https://siepic.ca/openEBL/">openEBL</a>.
 - Slides: <a href="https://docs.google.com/presentation/d/18B8UAUWxal7vW1-bIIp5o7Mb6nLZ9Ep64zdLF2bcjPQ">link</a>
 
+# Fabrication process: Passive Silicon
+## Technical summary:
+- SOI wafer, 220 nm silicon
+- Baseline process:
+  - Single full etch, using a negative resist (HSQ)
+  - Oxide cladding
+
+## Layer table
+| Name            | Layer/datatype | Description                                                                          |
+|-----------------|----------------|--------------------------------------------------------------------------------------|
+| Si  | 1/99 | Layer to draw silicon geometries |
+| Floorplan | 99/0 | Marks the layout design area |
+| Text | 10/0 | Text labels for automated measurements |
+| DevRec | 68/0 | Device recognition layer for component connectivity, netlist extraction, and verification|
+| PinRec  | 1/10  | Port/pins recognition layer for component connectivity, netlist extraction, and verification|
+| Waveguide | 1/99 | Virtual layer, guiding shape for waveguide, used for length calculation |
+| SEM | 200/0 | Requests for SEM images. Rectangles in a 4:3 aspect |
+
+
 # Submission instructions:
 
 The submission involves several steps. First, you need to create your design(s) using the process design kit (PDK) for this specific fabrication run. Then you need to create a Fork of this repository, commit your design(s), ensure that it passes the checks, and create a pull request. Once your pull request is approved, your design(s) will be merged into the layout for fabrication. You should verify that your design is correctly merged. Once the designs are fabricated, they will be tested, and the measurement results will be posted in this repository.

@@ -32,8 +32,7 @@ jobs:
         run: |
 
           # get added/modified py files
-          export FILES=$(git diff --name-only --diff-filter=ACM ${{ github.event.before }} ${{ github.sha }} -- "submissions/KLayout Python" | grep -E '\.py$')
-          echo "FILES=$FILES" >> $GITHUB_ENV
+          FILES=$(git diff --name-only --diff-filter=ACM ${{ github.event.before }} ${{ github.sha }} -- "submissions/KLayout Python" | grep -E '\.py$')
 
           echo "Added / modified Python files; $FILES"
 

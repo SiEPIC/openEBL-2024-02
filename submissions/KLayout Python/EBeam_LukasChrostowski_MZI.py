@@ -21,6 +21,7 @@ pip install required packages:
 
 designer_name = 'LukasChrostowski'
 top_cell_name = 'EBeam_%s_MZI' % designer_name
+export_type = 'PCell'  # static: for fabrication, PCell: include PCells in file
 
 import pya
 from pya import *
@@ -156,10 +157,14 @@ connect_pins_with_waveguide(instY1, 'opt3', instSpiral, 'optB', waveguide_type=w
 # Zoom out
 zoom_out(cell)
 
-# Save
+# Export for fabrication, removing PCells
 path = os.path.dirname(os.path.realpath(__file__))
 filename = os.path.splitext(os.path.basename(__file__))[0]
-file_out = export_layout(cell, path, filename, relative_path = '..', format='oas', screenshot=True)
+if export_type == 'static':
+    file_out = export_layout(cell, path, filename, relative_path = '..', format='oas', screenshot=True)
+else:
+    file_out = os.path.join(path,'..',filename+'.oas')
+    ly.write(file_out)
 
 # Verify
 file_lyrdb = os.path.join(path,filename+'.lyrdb')

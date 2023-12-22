@@ -15,6 +15,7 @@ pip install required packages:
 
 designer_name = 'LukasChrostowski'
 top_cell_name = 'EBeam_%s_rings' % designer_name
+export_type = 'PCell'  # static: for fabrication, PCell: include PCells in file
 
 import pya
 from pya import *
@@ -156,16 +157,19 @@ ly, cell = dbl_bus_ring_res()
 num_errors = layout_check(cell=cell, verbose=False, GUI=True)
 print('Number of errors: %s' % num_errors)
 
-# Save
+# Export for fabrication, removing PCells
 path = os.path.dirname(os.path.realpath(__file__))
 filename = os.path.splitext(os.path.basename(__file__))[0]
-file_out = export_layout(cell, path, filename, relative_path = '..', format='oas', screenshot=True)
+if export_type == 'static':
+    file_out = export_layout(cell, path, filename, relative_path = '..', format='oas', screenshot=True)
+else:
+    file_out = os.path.join(path,'..',filename+'.oas')
+    ly.write(file_out)
 
 from SiEPIC.verification import layout_check
 print('SiEPIC_EBeam_PDK: example_Ring_resonator_sweep.py - verification')
 file_lyrdb = os.path.join(path,filename+'.lyrdb')
 num_errors = layout_check(cell = cell, verbose=False, GUI=True, file_rdb=file_lyrdb)
-
 
 # Display the layout in KLayout, using KLayout Package "klive", which needs to be installed in the KLayout Application
 if Python_Env == 'Script':

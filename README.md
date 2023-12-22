@@ -35,7 +35,7 @@ The submission involves several steps. First, you need to create your design(s) 
 ## Submission via GitHub
  
  - Create an account on GitHub
- - Fork a copy of this GitHub repository into your own account:  <a href="https://github.com/SiEPIC/openEBL-2024-02/fork">Create a new fork</a> 
+ - Fork a copy of this GitHub repository into your own account:  <a href="../../fork">Create a new fork</a> 
  - [Optional] Install GitHub Desktop (or git) on your computer, and Clone a local copy: <a href="x-github-client://openRepo/https://github.com/SiEPIC/openEBL-2024-02">Open with GitHub Desktop</a>
  - Create your design, and ensure that the filename contains your <a href="https://www.edx.org/learn/engineering/university-of-british-columbia-silicon-photonics-design-fabrication-and-data-ana">edX.org</a> username, and be formatted according to the course/workshop as follows:
    - EBeam_username.oas: for the <a href="https://www.edx.org/learn/engineering/university-of-british-columbia-silicon-photonics-design-fabrication-and-data-ana">edX Phot1x silicon photonics design course</a>
@@ -43,7 +43,7 @@ The submission involves several steps. First, you need to create your design(s) 
    - SiEPIC_Passives_username.oas: for the <a href="https://www.cmc.ca/passive-silicon-photonics-fabrication-workshop-2023">CMC SiEPIC Passives silicon photonics workshop</a>
    - For example: EBeam_LukasChrostowski_rings.oas
  - Upload your design(s) into the "submissions" folder, as a binary file, namely a .gds (GDSII format) or .oas (OASIS format) file. 
-    - This can be done via the GitHub web page, by navigating to the <a href=blob/main/submissions>submissions folder</a>, then clicking on Add file, and Upload files. 
+    - This can be done via the GitHub web page, by navigating to the <a href=../../tree/main/submissions>submissions folder</a>, then clicking on Add file, and Upload files. 
     - Click Commit changes, and wait for the verification to complete
     - If there are errors, please review and correct the errors
  - Alternatively upload your Python file, which will be compiled by a GitHub Action.  

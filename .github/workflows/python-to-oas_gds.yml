@@ -75,6 +75,20 @@ jobs:
 
           echo "OUTPUT_FILES=$OUTPUT_FILES" >> $GITHUB_ENV
 
+      - name: move oas and gds files to a new folder
+        run: |
+          mkdir -p python_to_oas_gds
+
+          for file in $OUTPUT_FILES; do
+            cp "submissions/$file" python_to_oas_gds/
+          done
+      
+      - name: upload .oas and .gds as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-to-oas-gds
+          path: python_to_oas_gds/
+
       - name: write added oas and gds files to txt file
         run: |
           echo "$OUTPUT_FILES" > python-to-gds_oas.txt

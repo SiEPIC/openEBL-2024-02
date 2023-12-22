@@ -17,12 +17,18 @@ The submission involves several steps. First, you need to create your design(s) 
  - Create an account on GitHub
  - Fork a copy of this GitHub repository into your own account:  <a href="https://github.com/SiEPIC/openEBL-2024-02/fork">Create a new fork</a> 
  - [Optional] Install GitHub Desktop (or git) on your computer, and Clone a local copy: <a href="x-github-client://openRepo/https://github.com/SiEPIC/openEBL-2024-02">Open with GitHub Desktop</a>
- - Upload your design(s) into the "submissions" folder, as a binary file, namely a .gds (GDSII format) or .oas (OASIS format) file. The filename must contain your <a href="https://www.edx.org/learn/engineering/university-of-british-columbia-silicon-photonics-design-fabrication-and-data-ana">edX.org</a> username, e.g., EBeam_LukasChrostowski_rings.oas
+ - Create your design, and ensure that the filename contains your <a href="https://www.edx.org/learn/engineering/university-of-british-columbia-silicon-photonics-design-fabrication-and-data-ana">edX.org</a> username, and be formatted according to the course/workshop as follows:
+   - EBeam_username.oas: for the <a href="https://www.edx.org/learn/engineering/university-of-british-columbia-silicon-photonics-design-fabrication-and-data-ana">edX Phot1x silicon photonics design course</a>
+   - ELEC413_username.oas: for the <a href="https://ece.ubc.ca/courses/elec-413/">UBC ELEC 413 course</a>
+   - SiEPIC_Passives_username.oas: for the <a href="https://www.cmc.ca/passive-silicon-photonics-fabrication-workshop-2023">CMC SiEPIC Passives silicon photonics workshop</a>
+   - For example: EBeam_LukasChrostowski_rings.oas
+ - Upload your design(s) into the "submissions" folder, as a binary file, namely a .gds (GDSII format) or .oas (OASIS format) file. 
     - This can be done via the GitHub web page, by navigating to the <a href=blob/main/submissions>submissions folder</a>, then clicking on Add file, and Upload files. 
     - Click Commit changes, and wait for the verification to complete
     - If there are errors, please review and correct the errors
  - Alternatively upload your Python file, which will be compiled by a GitHub Action.  
    - For KLayout designs, use the "submissions/KLayout Python" folder, namely a .py (Python format) file.  e.g., EBeam_LukasChrostowski_MZI.py.  The Python file should save a gds or oas file into the parent "submissions" folder. The Python script needs to be executable in non-GUI mode, namely using "import klayout SiEPIC SiEPIC-EBeam-PDK"
+ - Check below for the merged design, and ensure that your design is correctly included
  - Create a <a href="https://help.github.com/articles/using-pull-requests/">Pull Request</a> -- this will notify the team of your contribution, which we can aggregate into the main design file
  - Return to the main repository, and check for the merged design
 
@@ -33,7 +39,7 @@ The submission involves several steps. First, you need to create your design(s) 
 3) Performing Functional verification on the designs in the "submissions" folder, and outputing the errors as an Artifact
 4) Merging the designs from the "submissions" folder, and outputing merged layout as an Artifact
 
-## Latest Merge Script Files
+## Latest Merge Layout File
 
 <!-- start-link -->
 https://github.com/SiEPIC/openEBL-2024-02/actions/runs/7295086726/artifacts/1130242524

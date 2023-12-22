@@ -6,10 +6,10 @@ Run using Python, with import klayout and SiEPIC
 
 Input:
 - folder submissions
-- containing files {EBeam*, ELEC463*, ELEC413}.{GDS,gds,OAS,oas}
+- containing files {EBeam*, ELEC463*, ELEC413*, SiEPIC_Passives*, SiEPIC_Actives*}.{GDS,gds,OAS,oas,py}
 Output
 - in folder "merge"
--   files: EBeam.gds, EBeam.oas, EBeam.txt, EBeam.coords
+-   files: EBeam.oas, EBeam.txt, EBeam.coords
 
 '''
 
@@ -60,10 +60,12 @@ from SiEPIC.utils import find_automated_measurement_labels
 import os
 
 if Python_Env == 'Script':
-    try:
+    import importlib.util
+    spam_spec = importlib.util.find_spec("siepic_ebeam_pdk")
+    if spam_spec is not None:
         # For external Python mode, when installed using pip install siepic_ebeam_pdk
         import siepic_ebeam_pdk
-    except:
+    else:
         # Load the PDK from a folder, e.g, GitHub
         import os, sys
         path_GitHub = os.path.expanduser('~/Documents/GitHub/')
@@ -117,6 +119,10 @@ for f in sorted(files):
 cell_edXphot1x = layout.create_cell("edX")
 t = Trans(Trans.R0, 0,0)
 top_cell.insert(CellInstArray(cell_edXphot1x.cell_index(), t))
+cell_ELEC413 = layout.create_cell("ELEC413")
+top_cell.insert(CellInstArray(cell_ELEC413.cell_index(), t))
+cell_SiEPIC_Passives = layout.create_cell("SiEPIC_Passives")
+top_cell.insert(CellInstArray(cell_SiEPIC_Passives.cell_index(), t))
 
 # Create a date	stamp cell
 cell_date = layout.create_cell('.merged:'+now.strftime("%Y-%m-%d-%H:%M:%S"))
@@ -132,8 +138,16 @@ for f in [f for f in files_in if '.oas' in f.lower() or '.gds' in f.lower()]:
     # Load layout  
     layout2 = pya.Layout()
     layout2.read(f)
-    course = 'edXphot1x'
+
+    if 'ebeam' in f.lower():
+        course = 'edXphot1x'
+    elif 'elec413' in f.lower():
+        course = 'ELEC413'
+    elif 'siepic_passives' in f.lower():
+        course = 'SiEPIC_Passives'
+
     cell_course = eval('cell_' + course)
+    log("  - course name: %s" % (course) )
 
     # Check the DBU Database Unit, in case someone changed it, e.g., 5 nm, or 0.1 nm.
     if round(layout2.dbu,10) != dbu:
@@ -173,7 +187,7 @@ for f in [f for f in files_in if '.oas' in f.lower() or '.gds' in f.lower()]:
             # Create sub-cell using the filename under top cell
             subcell2 = layout.create_cell(os.path.basename(f)+"_"+filedate)
             t = Trans(Trans.R0, 8780000,8780000)      
-            cell_course.insert(CellInstArray(subcell2.cell_index(), t))
+            top_cell.insert(CellInstArray(subcell2.cell_index(), t))
             # copy
             subcell2.copy_tree(layout2.cell(cell.name)) 
             break

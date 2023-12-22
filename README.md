@@ -11,6 +11,7 @@
 - Baseline process:
   - Single full etch, using a negative resist (HSQ)
   - Oxide cladding
+- Process Design Kit: [SiEPIC-EBeam-PDK](https://github.com/siepic/SiEPIC_EBeam_PDK) 
 
 ## Layer table
 | Name            | Layer/datatype | Description                                                                          |

@@ -89,10 +89,6 @@ jobs:
           name: python-to-oas-gds
           path: python_to_oas_gds/
 
-      - name: write added oas and gds files to txt file
-        run: |
-          echo "$OUTPUT_FILES" > python-to-gds_oas.txt
-
       - name: commit outputted oas and gds files into repository
         run: |
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"

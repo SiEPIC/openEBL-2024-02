@@ -36,35 +36,30 @@ jobs:
           python -m pip install --upgrade pip
           pip install klayout SiEPIC siepic_ebeam_pdk
           python -m pip install --upgrade SiEPIC
+
+      - name: download latest python-to-oas-gds artifact from triggering workflow
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          run_id: ${{ github.event.workflow_run.id }}
+          name: python-to-oas-gds
+          path: ./binary_files
+          search_artifacts: true
           
       - name: get .gds and .oas files
         run: |
-          
 
-          # if the action is being triggered after running python files, get resulting oas files from txt file
+          # if the action is being triggered after running python files, get resulting oas/gds files from artifact
           # github actions is not configured to detect files pushed from another action, thus we cannot use the 'else' method below
-          if [ -s "python-to-gds_oas.txt" ] && [ -n "$(cat python-to-gds_oas.txt)" ]; then
-
-            export FILES=$(cat python-to-gds_oas.txt)
-            IFS=' '
-            echo "" > python-to-gds_oas.txt
-             
-            # push empty text file to repo
-            git config --local user.email "${{ github.actor }}@users.noreply.github.com"
-            git config --local user.name "${{ github.actor }}"
-            git add python-to-gds_oas.txt
-            git commit -m "Emptying text file" 
-            git push
-
+          if [ "${{ github.event_name }}" == "workflow_run" ]; then
+            FILES=$(ls ./binary_files)
           else
             if [ "${{ github.event_name }}" = "pull_request" ]; then
               # triggered on pull request, get all changed / added files from forked repo
-              export FILES=$(git diff --name-only --diff-filter=ACM FETCH_HEAD | grep -E '\.(gds|oas)$' | sed 's|^submissions/||')
+              FILES=$(git diff --name-only --diff-filter=ACM FETCH_HEAD | grep -E '\.(gds|oas)$' | sed 's|^submissions/||' | tr '\n' ' ')
             else
               # triggered push, locate the changed / added .gds and .oas files in the submission folder
-              export FILES=$(git diff --name-status --diff-filter=ACM --relative=submissions ${{ github.event.before }} ${{ github.sha }} submissions | grep -E '\.(gds|oas)$' | awk '{print $2}')
+              FILES=$(git diff --name-status --diff-filter=ACM --relative=submissions ${{ github.event.before }} ${{ github.sha }} submissions | grep -E '\.(gds|oas)$' | awk '{print $2}' | tr '\n' ' ')
             fi
-            IFS=$'\n'
           fi
 
           echo "FILES=$FILES" >> $GITHUB_ENV
@@ -75,9 +70,11 @@ jobs:
           echo "Files for verification; $FILES"
 
           files_with_errors=""
+
+          IFS=$'\n'
         
           # run verification on all files
-          for file in $FILES; do
+          for file in "$FILES"; do
 
             echo "Running verification on $file"
 

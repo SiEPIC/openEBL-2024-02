@@ -38,7 +38,7 @@ jobs:
 
           # delete .oas and .gds files in the runner's submissions folder
           # this is needed in the case where someone already has file_name.gds and is now trying to generate file_name.oas (or vice versa)
-          rm -f submissions/*.gds submissions/*.oas
+          rm submissions/*.gds submissions/*.oas
 
           IFS=$'\n'
         
@@ -89,20 +89,12 @@ jobs:
           name: python-to-oas-gds
           path: python_to_oas_gds/
 
-      - name: write added oas and gds files to txt file
-        run: |
-          echo "$OUTPUT_FILES" > python-to-gds_oas.txt
-
       - name: commit outputted oas and gds files into repository
         run: |
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"
           git config --local user.name "${{ github.actor }}"
 
-          git add python-to-gds_oas.txt
-
-          echo "git add python-to-gds_oas.txt"
-
-          # git add all produced oas files
+          # git add all produced oas/gds files
           for file in $OUTPUT_FILES; do
             git add "submissions/$file"
             echo "git add $file"

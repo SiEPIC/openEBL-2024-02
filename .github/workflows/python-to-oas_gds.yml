@@ -38,7 +38,7 @@ jobs:
 
           # delete .oas and .gds files in the runner's submissions folder
           # this is needed in the case where someone already has file_name.gds and is now trying to generate file_name.oas (or vice versa)
-          rm submissions/*.gds submissions/*.oas
+          rm -rf submissions/*.gds submissions/*.oas
 
           IFS=$'\n'
         

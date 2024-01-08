@@ -87,4 +87,4 @@ jobs:
           git add README.md
           git commit -m "update README with new artifact url $ARTIFACT_URL"
           git push 
-        if: ${{ github.repository_owner == 'SiEPIC'}}
+        if: ${{ github.triggering_actor == github.repository_owner }}

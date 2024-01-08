@@ -37,13 +37,14 @@ jobs:
           pip install klayout SiEPIC siepic_ebeam_pdk
           python -m pip install --upgrade SiEPIC
 
-      - name: download latest python-to-oas-gds artifact from triggering workflow
+      - name: download latest python-to-oas-gds artifact from triggering workflow 
         uses: dawidd6/action-download-artifact@v2
         with:
           run_id: ${{ github.event.workflow_run.id }}
           name: python-to-oas-gds
           path: ./binary_files
           search_artifacts: true
+        if: ${{ github.event_name == 'workflow_run' }}
           
       - name: get .gds and .oas files
         run: |

@@ -75,7 +75,7 @@ jobs:
           IFS=$'\n'
         
           # run verification on all files
-          for file in "$FILES"; do
+          for file in $FILES; do
 
             echo "Running verification on $file"
 

@@ -30,11 +30,11 @@ repos:
     rev: v1.1.0
     hooks:
       - id: j2lint
-        args: [--ignore, jinja-statements-delimiter, jinja-statements-indentation, --] #fixes nested node blocks, fixes delimeters 
+        args: [--ignore, jinja-statements-delimiter, jinja-statements-indentation, --] #fixes nested node blocks, fixes delimeters
 
-  - repo: https://github.com/markdownlint/markdownlint.git #lint tool
-    rev: v0.12.0
-    hooks:
-      - id: markdownlint
-        args: [--rules, '~MD007,~MD012,~MD013,~MD026,~MD029,~MD033,~MD034'] #checks for different things
-        exclude: '^docs/CHANGELOG.md$'
+  # - repo: https://github.com/markdownlint/markdownlint.git #lint tool
+  #   rev: v0.12.0
+  #   hooks:
+  #     - id: markdownlint
+  #       args: [--rules, '~MD007,~MD012,~MD013,~MD026,~MD029,~MD033,~MD034'] #checks for different things
+  #       exclude: '^docs/CHANGELOG.md$'

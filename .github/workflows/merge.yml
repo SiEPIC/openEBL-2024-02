@@ -120,4 +120,4 @@ jobs:
           git add index.html
           git commit -m "Update index.html to redirect to new merge artifact url"
           git push 
-        if: ${{ env.OWNER == 'SiEPIC'}}
+        if: ${{ github.repository_owner == 'SiEPIC'}}

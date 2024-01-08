@@ -50,7 +50,7 @@ jobs:
         with:
           name: merge-files
           path: merge_output/
-      
+
       - name: get artifact url
         run: |
           IFS='/' read -ra REPO <<< "$GITHUB_REPOSITORY"
@@ -58,26 +58,26 @@ jobs:
           REPO_NAME="${REPO[1]}"
           echo "Owner: $OWNER"
           echo "Repository: $REPO_NAME"
-          
+
           RUN_ID=${{ github.run_id }}
           ARTIFACT_ID=${{ steps.artifact-upload.outputs.artifact-id }}
           ARTIFACT_URL="https://github.com/$OWNER/$REPO_NAME/actions/runs/$RUN_ID/artifacts/$ARTIFACT_ID"
           echo "Artifact URL: $ARTIFACT_URL"
-          
+
           echo "ARTIFACT_URL=$ARTIFACT_URL" >> $GITHUB_ENV
           echo "OWNER=$OWNER" >> $GITHUB_ENV
-          
-      - name: update url in runner README 
+
+      - name: update url in runner README
         run: |
           start_delim="<!-- start-link -->"
           end_delim="<!-- end-link -->"
-          
+
           # remove current URL
           sed -i "/$start_delim/,/$end_delim/d" README.md
-          
+
           # add new URL
           printf "$start_delim\n$ARTIFACT_URL\n$end_delim\n" >> README.md
-          
+
       # merge script always runs on any PR, this ensures link is only updated after a PR is merged into SiEPIC
       - name: commit and push changes to README if we are in SiEPIC repo
         run: |
@@ -86,5 +86,5 @@ jobs:
           git config --local user.name "${{ github.actor }}"
           git add README.md
           git commit -m "update README with new artifact url $ARTIFACT_URL"
-          git push 
+          git push
         if: ${{ github.triggering_actor == github.repository_owner }}

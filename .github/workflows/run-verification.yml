@@ -44,6 +44,7 @@ jobs:
           name: python-to-oas-gds
           path: ./binary_files
           search_artifacts: true
+        if: ${{ github.event_name == 'workflow_run' }}
           
       - name: get .gds and .oas files
         run: |

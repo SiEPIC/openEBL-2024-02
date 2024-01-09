@@ -38,7 +38,6 @@ jobs:
         # can also specify python version if needed
       - name: setup python
         uses: actions/setup-python@v4
-        if: env.TRIGGER_INFO != 'pull_request'
 
       - name: install python packages
         run: |

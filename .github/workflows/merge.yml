@@ -16,6 +16,25 @@ jobs:
       - name: checkout repo content
         uses: actions/checkout@v2
 
+      - name: download verification trigger artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          run_id: ${{ github.event.workflow_run.id }}
+          name: verification-trigger
+          path: .
+          search_artifacts: true
+
+      - name: check if verification action was triggered by a pull request
+        run: |
+          trigger_info=$(cat trigger_info.txt)
+
+          if [[ "$trigger_info" == "pull_request" ]]; then
+            echo "This workflow was triggered by a pull request. Do not complete merge."
+            exit 0
+          else
+            echo "This workflow was not triggered by a pull request. Continue with merge."
+          fi
+
         # can also specify python version if needed
       - name: setup python
         uses: actions/setup-python@v4
@@ -28,7 +47,6 @@ jobs:
 
       - name: run merge script
         run: |
-
           python merge/EBeam_merge.py
 
       - name: move merge output files to new folder
@@ -87,4 +105,4 @@ jobs:
           git add README.md
           git commit -m "update README with new artifact url $ARTIFACT_URL"
           git push
-        if: ${{ github.triggering_actor == github.repository_owner }}
+        #if: ${{ github.triggering_actor == github.repository_owner }}

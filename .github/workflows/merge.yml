@@ -30,7 +30,7 @@ jobs:
 
           if [[ "$trigger_info" == "pull_request" ]]; then
             echo "This workflow was triggered by a pull request. Do not update url in read me."
-            ECHO "TRIGGER_INFO=$trigger_info" >> $GITHUB_ENV
+            echo "TRIGGER_INFO=$trigger_info" >> $GITHUB_ENV
           else
             echo "This workflow was not triggered by a pull request. Continue with merge and update url in read me."
           fi

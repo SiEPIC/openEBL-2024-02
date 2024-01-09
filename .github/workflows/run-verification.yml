@@ -27,6 +27,17 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: write what triggered this workflow to a txt file
+        run: |
+          echo "${{ github.event_name }}" > trigger_info.txt
+          cat trigger_info.txt
+
+      - name: upload trigger txt file as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: verification-trigger
+          path: trigger_info.txt
+
         # can also specify python version if needed
       - name: setup python
         uses: actions/setup-python@v4
@@ -112,17 +123,6 @@ jobs:
         with:
           name: layout-errors
           path: verification_output/
-
-      - name: write what triggered this workflow to a txt file
-        run: |
-          echo "${{ github.event_name }}" > trigger_info.txt
-          cat trigger_info.txt
-
-      - name: upload trigger txt file as an artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: verification-trigger
-          path: trigger_info.txt
 
       - name: fail if there are errors from layout verification
         run: |

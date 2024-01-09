@@ -11,7 +11,6 @@ repos:
     rev: 1b028cc9d99c2c2e82f9b727742539173a92a373
     hooks:
       - id: black #python code formatter
-        # exclude: '^gdsfactory/samples/notebooks/|^docs/notebooks/'
 
   - repo: https://github.com/codespell-project/codespell #fix common misspellings in text files
     rev: 38bc4a97f6e22827e86526148efa38f1044a97f8
@@ -25,12 +24,6 @@ repos:
     hooks:
       - id: ruff
         args: [ --fix, --exit-non-zero-on-fix ]
-
-  - repo: https://github.com/aristanetworks/j2lint.git #linter
-    rev: v1.1.0
-    hooks:
-      - id: j2lint
-        args: [--ignore, jinja-statements-delimiter, jinja-statements-indentation, --] #fixes nested node blocks, fixes delimeters
 
   # - repo: https://github.com/markdownlint/markdownlint.git #lint tool
   #   rev: v0.12.0

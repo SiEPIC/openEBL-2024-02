@@ -8,6 +8,8 @@ on:
     branches:
       - '**'
   pull_request:
+    paths:
+      - "submissions/KLayout Python/**.py"
     branches:
       - '**'
 

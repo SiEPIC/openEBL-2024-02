@@ -30,12 +30,13 @@
 The submission involves several steps. First, you need to create your design(s) using the process design kit (PDK) for this specific fabrication run. Then you need to create a Fork of this repository, commit your design(s), ensure that it passes the checks, and create a pull request. Once your pull request is approved, your design(s) will be merged into the layout for fabrication. You should verify that your design is correctly merged. Once the designs are fabricated, they will be tested, and the measurement results will be posted in this repository.
 
 ## Design software and PDK installation instructions:
- - Design tools and process design kit (SiEPIC-EBeam-PDK, KLayout implementation)<a href="https://github.com/siepic/SiEPIC_EBeam_PDK/wiki/Installation-instructions">installation instructions</a>. 
+ - Design tools and process design kit (SiEPIC-EBeam-PDK, KLayout implementation)<a href="https://github.com/siepic/SiEPIC_EBeam_PDK/wiki/Installation-instructions"> installation instructions</a>. 
 
 ## Submission via GitHub
  
  - Create an account on GitHub
- - Fork a copy of this GitHub repository into your own account:  <a href="../../fork">Create a new fork</a> 
+ - Fork a copy of this GitHub repository into your own account:  <a href="../../fork">Create a new fork</a>.
+ - Turn on the GitHub Actions on your forked repository (Go to your repository's page on GitHub, click on Actions in the top-menu bar, and enable the workflows).
  - [Optional] Install GitHub Desktop (or git) on your computer, and Clone a local copy: <a href="x-github-client://openRepo/https://github.com/SiEPIC/openEBL-2024-02">Open with GitHub Desktop</a>
  - Create your design, and ensure that the filename contains your <a href="https://www.edx.org/learn/engineering/university-of-british-columbia-silicon-photonics-design-fabrication-and-data-ana">edX.org</a> username, and be formatted according to the course/workshop as follows:
    - EBeam_username.oas: for the <a href="https://www.edx.org/learn/engineering/university-of-british-columbia-silicon-photonics-design-fabrication-and-data-ana">edX Phot1x silicon photonics design course</a>
@@ -44,8 +45,8 @@ The submission involves several steps. First, you need to create your design(s) 
    - For example: EBeam_LukasChrostowski_rings.oas
  - Upload your design(s) into the "submissions" folder, as a binary file, namely a .gds (GDSII format) or .oas (OASIS format) file. 
     - This can be done via the GitHub web page, by navigating to the <a href=../../tree/main/submissions>submissions folder</a>, then clicking on Add file, and Upload files. 
-    - Click Commit changes, and wait for the verification to complete
-    - If there are errors, please review and correct the errors
+    - Click Commit changes, and wait for the verification (via github actions) to complete. This will appear as a green checkmark or red X next to your commit on GitHub. 
+    - If there are errors, please review and correct the errors. You can run your verification locally (press V in klayout) or download the output .lydrb verification file from GitHub.
  - Alternatively upload your Python file, which will be compiled by a GitHub Action.  
    - For KLayout designs, use the "submissions/KLayout Python" folder, namely a .py (Python format) file.  e.g., EBeam_LukasChrostowski_MZI.py.  The Python file should save a gds or oas file into the parent "submissions" folder. The Python script needs to be executable in non-GUI mode, namely using "import klayout SiEPIC SiEPIC-EBeam-PDK"
  - Check below for the merged design, and ensure that your design is correctly included

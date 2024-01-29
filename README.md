@@ -63,5 +63,5 @@ The submission involves several steps. First, you need to create your design(s) 
 ## Latest Merge Layout File
 
 <!-- start-link -->
-https://github.com/SiEPIC/openEBL-2024-02/actions/runs/7689426104/artifacts/1201111253
+https://github.com/JaewooKim-cloud/openEBL-2024-02/actions/runs/7689444820/artifacts/1201113807
 <!-- end-link -->

@@ -78,11 +78,31 @@ jobs:
             fi
           fi
 
-          echo "$FILES"
-          echo "FILES=$FILES" >> $GITHUB_ENV
+                    
+          # we cannot set a multiline env vars so we must change it to single line (seperated by commas) if we have more than one file
+          if [ $(echo "$FILES" | wc -l) -gt 1 ]; then
+            # Replace newlines with a delimiter (e.g., comma)
+            FILES_SINGLE_LINE=$(echo "$FILES" | tr '\n' ',')
+          else
+            # Keep the original content without modification
+            FILES_SINGLE_LINE="$FILES"
+          fi
+
+          echo "$FILES_SINGLE_LINE"
+          echo "FILES_SINGLE_LINE=$FILES_SINGLE_LINE" >> $GITHUB_ENV
 
       - name: run layout verification
         run: |
+
+          # Check if there is a comma in the variable and revert it back to a multiline var
+          if [[ "$FILES_SINGLE_LINE" == *","* ]]; then
+            # Replace the delimiter with newlines
+            FILES=$(echo "$FILES_SINGLE_LINE" | tr ',' '\n')
+          else
+            # No comma found, keep the original content without modification
+            FILES="$FILES_SINGLE_LINE"
+          fi
+        
           # print the names of the files
           echo "Files for verification; $FILES"
 

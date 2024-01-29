@@ -121,4 +121,4 @@ jobs:
           git add README.md
           git commit -m "update README with new artifact url $ARTIFACT_URL"
           git push
-        if: github.repository_owner == 'SiEPIC' && env.TRIGGER_INFO != 'pull request'
+        if: env.TRIGGER_INFO != 'pull request' && github.repository_owner == 'SiEPIC'

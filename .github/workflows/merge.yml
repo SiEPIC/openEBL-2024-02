@@ -11,7 +11,7 @@ on:
 jobs:
   merge:
     # only run the merge script on the SiEPIC account  
-    if: github.repository_owner == 'SiEPIC'
+    #if: github.repository_owner == 'SiEPIC'
       # if: >-
       # github.event.pull_request.user.login != 'SiEPIC' &&
       # repository_dispatch.organization
@@ -110,4 +110,7 @@ jobs:
           git add README.md
           git commit -m "update README with new artifact url $ARTIFACT_URL"
           git push
-        if: env.TRIGGER_INFO != 'pull_request'
+        # run during a pull request
+        # if: env.TRIGGER_INFO != 'pull_request'
+        # run after a pull request
+        if: github.repository_owner == 'SiEPIC' && env.TRIGGER_INFO != 'pull request'

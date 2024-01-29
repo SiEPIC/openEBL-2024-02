@@ -99,6 +99,8 @@ jobs:
 
             # get number of errors
             errors_from_output=$(echo "$output" | tail -n 1)
+            errors_from_output2=$(echo "$output")
+            echo "errors: $errors_from_output2"
 
             echo "$errors_from_output errors detected for $file"
 

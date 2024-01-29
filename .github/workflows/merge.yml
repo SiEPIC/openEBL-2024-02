@@ -28,6 +28,7 @@ jobs:
           name: verification-trigger
           path: .
           search_artifacts: true
+        if: github.event_name != 'workflow_dispatch'
 
       - name: check if verification action was triggered by a pull request
         run: |
@@ -38,6 +39,14 @@ jobs:
           else
             echo "This workflow was not triggered by a pull request. Continue with merge and update url in read me."
           fi
+        if: github.event_name != 'workflow_dispatch'
+
+      # there is only an artifact to download if this action is triggered after the verification action
+      # if it is manually triggered we set the var trigger_info manually 
+      - name: if this action was manually triggered set trigger_info var
+        run: |
+          trigger_info='workflow_dispatch'
+          echo "TRIGGER_INFO=$trigger_info" >> $GITHUB_ENV
 
         # can also specify python version if needed
       - name: setup python

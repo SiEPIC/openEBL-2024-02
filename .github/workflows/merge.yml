@@ -33,9 +33,10 @@ jobs:
       - name: check if verification action was triggered by a pull request
         run: |
           trigger_info=$(cat trigger_info.txt)
-          if [[ "$trigger_info" == "pull_request" ]]; then
+          if [[ "$trigger_info" == "pull_request" || "$trigger_info" == "pull_request_target" ]]; then
             echo "This workflow was triggered by a pull request. Do not update url in read me."
-            echo "TRIGGER_INFO=$trigger_info" >> $GITHUB_ENV
+            TRIGGER_INFO='pull request'
+            echo "TRIGGER_INFO=$TRIGGER_INFO" >> $GITHUB_ENV
           else
             echo "This workflow was not triggered by a pull request. Continue with merge and update url in read me."
           fi

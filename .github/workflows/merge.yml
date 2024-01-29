@@ -49,6 +49,7 @@ jobs:
         run: |
           trigger_info='workflow_dispatch'
           echo "TRIGGER_INFO=$trigger_info" >> $GITHUB_ENV
+        if: github.event_name == 'workflow_dispatch'
 
         # can also specify python version if needed
       - name: setup python

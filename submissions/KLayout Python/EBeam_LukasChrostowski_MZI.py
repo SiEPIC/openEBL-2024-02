@@ -120,7 +120,7 @@ instY2.transform(Trans(20000,0))
 connect_pins_with_waveguide(instGC1, 'opt1', instY1, 'opt1', waveguide_type=waveguide_type)
 connect_pins_with_waveguide(instGC2, 'opt1', instY2, 'opt1', waveguide_type=waveguide_type)
 connect_pins_with_waveguide(instY1, 'opt2', instY2, 'opt3', waveguide_type=waveguide_type)
-connect_pins_with_waveguide(instY1, 'opt3', instY2, 'opt2', waveguide_type=waveguide_type,turtle_B=[125,-90])
+connect_pins_with_waveguide(instY1, 'opt3', instY2, 'opt2', waveguide_type=waveguide_type,turtle_B=[600,-90])
 
 # 3rd MZI, with a very long delay line
 cell_ebeam_delay = ly.create_cell('spiral_paperclip', 'EBeam_Beta',

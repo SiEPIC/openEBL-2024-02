@@ -78,6 +78,7 @@ jobs:
             fi
           fi
 
+          echo "$FILES"
           echo "FILES=$FILES" >> $GITHUB_ENV
 
       - name: run layout verification

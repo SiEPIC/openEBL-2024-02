@@ -11,7 +11,7 @@ import sys
 Script to load .gds file passed in through commmand line and run verification using layout_check().
 Ouput lyrdb file is saved to path specified by 'file_lyrdb' variable in the script.
 
-Jasmina Brar 12/08/23
+Jasmina Brar 12/08/23, and Lukas Chrostowski
 
 """
 
@@ -25,13 +25,11 @@ layout.read(gds_file)
 # get top cell from layout
 top_cell = layout.top_cell()
 
-
 # set layout technology because the technology seems to be empty, and we cannot load the technology using TECHNOLOGY = get_technology() because this isn't GUI mode
 # refer to line 103 in layout_check()
 # tech = layout.technology()
 # print("Tech:", tech.name)
 layout.TECHNOLOGY = get_technology_by_name('EBeam')
-
 
 # run verification
 zoom_out(top_cell)
@@ -43,6 +41,14 @@ file_lyrdb = os.path.join(path,filename+'.lyrdb')
 
 # run verification
 num_errors = layout_check(cell = top_cell, verbose=True, GUI=True, file_rdb=file_lyrdb)
+
+# Make sure layout extent fits within the allocated area.
+cell_Width = 605000
+cell_Height = 410000
+bbox = top_cell.bbox()
+if bbox.width() > cell_Width or bbox.height() > cell_Height:
+   print('Error: Cell bounding box / extent is larger than the maximum size of 605 X 410 microns')
+   num_errors += 1
 
 # Print the result value to standard output
 print(num_errors)

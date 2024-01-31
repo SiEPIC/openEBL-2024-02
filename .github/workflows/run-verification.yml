@@ -17,8 +17,10 @@ on:
   pull_request:
     branches:
       - '**'
+
   # by default, GitHub only runs workflows on pull requests for approved users; this should allow it to run workshops on new users as well:
-  pull_request_target:
+  #pull_request_target:
+  # removed, since this action runs on the base code, and not the PR code, so won't actually test the PR
 
 
 jobs:

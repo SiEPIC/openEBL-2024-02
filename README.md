@@ -49,19 +49,20 @@ The submission involves several steps. First, you need to create your design(s) 
     - If there are errors, please review and correct the errors. You can run your verification locally (press V in klayout) or download the output .lydrb verification file from GitHub.
  - Alternatively upload your Python file, which will be compiled by a GitHub Action.  
    - For KLayout designs, use the "submissions/KLayout Python" folder, namely a .py (Python format) file.  e.g., EBeam_LukasChrostowski_MZI.py.  The Python file should save a gds or oas file into the parent "submissions" folder. The Python script needs to be executable in non-GUI mode, namely using "import klayout SiEPIC SiEPIC-EBeam-PDK"
- - Check below for the merged design, and ensure that your design is correctly included
  - Create a <a href="https://help.github.com/articles/using-pull-requests/">Pull Request</a> -- this will notify the team of your contribution, which we can aggregate into the main design file
- - Return to the main repository, and check for the merged design
-
-## Automated GitHub Actions
-
-1) Running the files in the "submissions/KLayout Python" folder, to generate the designs
-2) Performing Manufacturing DRC verification on the designs in the "submissions" folder, and outputing the errors as an Artifact
-3) Performing Functional verification on the designs in the "submissions" folder, and outputing the errors as an Artifact
-4) Merging the designs from the "submissions" folder, and outputing merged layout as an Artifact
+ - Return to the main repository, and ensure that your design is correctly merged. Download the Latest Merge file:
 
 ## Latest Merge Layout File
 
+
+
+## Automated GitHub Actions
+Optional: The verification and merging is performed using GitHub actions. The repository implements the following:
+1) Running the Python files in the "submissions/KLayout Python" folder, to generate the designs
+2) Performing Manufacturing DRC verification on the designs in the "submissions" folder, and outputing the errors as an Artifact
+3) Performing Functional verification on the designs in the "submissions" folder, and outputing the errors as an Artifact
+4) Merging the designs from the "submissions" folder, and outputing merged layout as an Artifact in the main repository
+
 <!-- start-link -->
-https://github.com/SiEPIC/openEBL-2024-02/actions/runs/7703823100/artifacts/1204033187
+https://github.com/SiEPIC/openEBL-2024-02/actions/runs/7731443502/artifacts/1209928672
 <!-- end-link -->

@@ -54,9 +54,6 @@ The submission involves several steps. First, you need to create your design(s) 
 
 ## Latest Merge Layout File
 
-<!-- start-link -->
-https://github.com/SiEPIC/openEBL-2024-02/actions/runs/7722949266/artifacts/1208048825
-<!-- end-link -->
 
 
 ## Automated GitHub Actions
@@ -66,3 +63,6 @@ Optional: The verification and merging is performed using GitHub actions. The re
 3) Performing Functional verification on the designs in the "submissions" folder, and outputing the errors as an Artifact
 4) Merging the designs from the "submissions" folder, and outputing merged layout as an Artifact in the main repository
 
+<!-- start-link -->
+https://github.com/SiEPIC/openEBL-2024-02/actions/runs/7723015838/artifacts/1208062088
+<!-- end-link -->

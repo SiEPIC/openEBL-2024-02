@@ -71,7 +71,7 @@ jobs:
           if [ "${{ github.event_name }}" == "workflow_run" ]; then
             FILES=$(ls ./binary_files)
           else
-            if [ "${{ github.event_name }}" = "pull_request" || "${{ github.event_name }}" = "pull_request_target" ]; then
+            if [[ "${{ github.event_name }}" == "pull_request" || "${{ github.event_name }}" == "pull_request_target" ]]; then
               # triggered on pull request, get all changed / added files from forked repo
               FILES=$(git diff --name-only --diff-filter=ACM FETCH_HEAD | grep -i -E '\.(gds|oas)$' | sed 's|^submissions/||')
             else

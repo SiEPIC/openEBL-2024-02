@@ -3,7 +3,6 @@
 
 - The Canadian Silicon Photonics Foundry, <a href="https://siepic.ca/fabrication/">SiEPICfab</a>, presents the open electron beam lithography (EBL) fabrication process, where former and current students of <a href="https://siepic.ca/education/">SiEPIC</a> workshops and courses can submit their design for manufacturing and testing.
 - More details about <a href="https://siepic.ca/openEBL/">openEBL</a>.
-- Slides: <a href="https://docs.google.com/presentation/d/18B8UAUWxal7vW1-bIIp5o7Mb6nLZ9Ep64zdLF2bcjPQ">link</a>
 
 # Fabrication process: Passive Silicon
 ## Technical summary:
@@ -50,11 +49,7 @@ The submission involves several steps. First, you need to create your design(s) 
  - Alternatively upload your Python file, which will be compiled by a GitHub Action.  
    - For KLayout designs, use the "submissions/KLayout Python" folder, namely a .py (Python format) file.  e.g., EBeam_LukasChrostowski_MZI.py.  The Python file should save a gds or oas file into the parent "submissions" folder. The Python script needs to be executable in non-GUI mode, namely using "import klayout SiEPIC SiEPIC-EBeam-PDK"
  - Create a <a href="https://help.github.com/articles/using-pull-requests/">Pull Request</a> -- this will notify the team of your contribution, which we can aggregate into the main design file
- - Return to the main repository, and ensure that your design is correctly merged. Download the Latest Merge file:
-
-## Latest Merge Layout File
-
-
+ - Return to the main repository, and ensure that your design is correctly merged. Download the Latest Merge file, below.
 
 ## Automated GitHub Actions
 Optional: The verification and merging is performed using GitHub actions. The repository implements the following:
@@ -62,6 +57,8 @@ Optional: The verification and merging is performed using GitHub actions. The re
 2) Performing Manufacturing DRC verification on the designs in the "submissions" folder, and outputing the errors as an Artifact
 3) Performing Functional verification on the designs in the "submissions" folder, and outputing the errors as an Artifact
 4) Merging the designs from the "submissions" folder, and outputing merged layout as an Artifact in the main repository
+
+## Latest Merge Layout File
 
 <!-- start-link -->
 https://github.com/SiEPIC/openEBL-2024-02/actions/runs/7750023947/artifacts/1213941818

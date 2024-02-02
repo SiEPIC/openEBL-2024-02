@@ -136,19 +136,22 @@ x,y = 0,cell_Height+cell_Gap_Height
 for f in [f for f in files_in if '.oas' in f.lower() or '.gds' in f.lower()]:
     filedate = datetime.fromtimestamp(os.path.getmtime(f)).strftime("%Y%m%d_%H%M")
     log("\nLoading: %s, dated %s" % (os.path.basename(f), filedate))
+    basefilename = os.path.basename(f)
   
     # Load layout  
     layout2 = pya.Layout()
     layout2.read(f)
 
-    if 'ebeam' in f.lower():
+    if 'ebeam' in basefilename.lower():
         course = 'edXphot1x'
-    elif 'elec413' in f.lower():
+    elif 'elec413' in basefilename.lower():
         course = 'ELEC413'
-    elif 'openebl' in f.lower():
+    elif 'openebl' in basefilename.lower():
         course = 'openEBL'
-    elif 'siepic_passives' in f.lower():
+    elif 'siepic_passives' in basefilename.lower():
         course = 'SiEPIC_Passives'
+    else:
+        course = 'openEBL'
 
     cell_course = eval('cell_' + course)
     log("  - course name: %s" % (course) )

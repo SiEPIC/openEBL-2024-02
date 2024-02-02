@@ -52,7 +52,7 @@ The submission involves several steps. First, you need to create your design(s) 
  - Create a <a href="https://help.github.com/articles/using-pull-requests/">Pull Request</a> -- this will notify the team of your contribution, which we can aggregate into the main design file
  - Return to the main repository, and ensure that your design is correctly merged. Download the Latest Merge file, below.
 
-<img width="924" alt="image" src="https://github.com/SiEPIC/openEBL-2024-02/assets/15843200/60875d00-19d8-4c7c-bb27-30f7fd7f121f">
+<img width="1281" alt="image" src="https://github.com/SiEPIC/openEBL-2024-02/assets/15843200/e4785a27-b971-4a64-8796-1e351f30c00e">
 
 ## Automated GitHub Actions
 Optional: The verification and merging is performed using GitHub actions. The repository implements the following:

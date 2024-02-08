@@ -6,7 +6,7 @@ Run using Python, with import klayout and SiEPIC
 
 Input:
 - folder submissions
-- containing files {EBeam*, ELEC463*, ELEC413*, SiEPIC_Passives*, SiEPIC_Actives*}.{GDS,gds,OAS,oas,py}
+- containing files {EBeam*, openEBL_*, ELEC463*, ELEC413*, SiEPIC_Passives*, SiEPIC_Actives*}.{GDS,gds,OAS,oas,py}
 Output
 - in folder "merge"
 -   files: EBeam.oas, EBeam.txt, EBeam.coords
@@ -123,6 +123,8 @@ cell_ELEC413 = layout.create_cell("ELEC413")
 top_cell.insert(CellInstArray(cell_ELEC413.cell_index(), t))
 cell_SiEPIC_Passives = layout.create_cell("SiEPIC_Passives")
 top_cell.insert(CellInstArray(cell_SiEPIC_Passives.cell_index(), t))
+cell_openEBL = layout.create_cell("openEBL")
+top_cell.insert(CellInstArray(cell_openEBL.cell_index(), t))
 
 # Create a date	stamp cell
 cell_date = layout.create_cell('.merged:'+now.strftime("%Y-%m-%d-%H:%M:%S"))
@@ -134,17 +136,22 @@ x,y = 0,cell_Height+cell_Gap_Height
 for f in [f for f in files_in if '.oas' in f.lower() or '.gds' in f.lower()]:
     filedate = datetime.fromtimestamp(os.path.getmtime(f)).strftime("%Y%m%d_%H%M")
     log("\nLoading: %s, dated %s" % (os.path.basename(f), filedate))
+    basefilename = os.path.basename(f)
   
     # Load layout  
     layout2 = pya.Layout()
     layout2.read(f)
 
-    if 'ebeam' in f.lower():
+    if 'ebeam' in basefilename.lower():
         course = 'edXphot1x'
-    elif 'elec413' in f.lower():
+    elif 'elec413' in basefilename.lower():
         course = 'ELEC413'
-    elif 'siepic_passives' in f.lower():
+    elif 'openebl' in basefilename.lower():
+        course = 'openEBL'
+    elif 'siepic_passives' in basefilename.lower():
         course = 'SiEPIC_Passives'
+    else:
+        course = 'openEBL'
 
     cell_course = eval('cell_' + course)
     log("  - course name: %s" % (course) )

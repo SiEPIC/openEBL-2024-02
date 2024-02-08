@@ -28,8 +28,10 @@ except:
 
 try:
    # get top cell from layout
-   if layout.top_cells() != 1:
-      print('Error: layout does not have 1 top cell')
+   if len(layout.top_cells()) != 1:
+      print('Error: layout does not have 1 top cell. It has %s.' % len(layout.top_cells()))
+      num_errors += 1
+
    top_cell = layout.top_cell()
 
    # set layout technology because the technology seems to be empty, and we cannot load the technology using TECHNOLOGY = get_technology() because this isn't GUI mode
@@ -54,7 +56,7 @@ try:
    cell_Height = 410000
    bbox = top_cell.bbox()
    if bbox.width() > cell_Width or bbox.height() > cell_Height:
-      print('Error: Cell bounding box / extent is larger than the maximum size of 605 X 410 microns')
+      print('Error: Cell bounding box / extent (%s, %s) is larger than the maximum size of %s X %s microns' % (bbox.width()/1000, bbox.height()/1000, cell_Width/1000, cell_Height/1000) )
       num_errors += 1
 except:
    print('Unknown error occurred')

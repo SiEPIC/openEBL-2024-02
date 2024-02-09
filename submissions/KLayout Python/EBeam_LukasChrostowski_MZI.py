@@ -1,6 +1,6 @@
 '''
 --- Simple MZI ---
- 
+  
 by Lukas Chrostowski, 2020-2023
    
 Example simple script to

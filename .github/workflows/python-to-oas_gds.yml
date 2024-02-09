@@ -107,6 +107,7 @@ jobs:
 
           # git add all produced oas/gds files
           for file in $OUTPUT_FILES; do
+            git add "$file"
             git add "submissions/$file"
             echo "done: git add $file"
           done

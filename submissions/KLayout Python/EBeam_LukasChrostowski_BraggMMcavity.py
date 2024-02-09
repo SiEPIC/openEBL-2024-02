@@ -50,7 +50,7 @@ with a top cell
 and Draw the floor plan
 '''    
 topcell, ly = new_layout(tech_name, top_cell_name, GUI=True, overwrite = True)
-floorplan(topcell, 1605e3, 410e3)
+floorplan(topcell, 2605e3, 410e3)
 
 dbu = ly.dbu
 

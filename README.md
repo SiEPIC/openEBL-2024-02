@@ -32,7 +32,7 @@ The submission involves several steps. First, you need to create your design(s) 
  - Design tools and process design kit (SiEPIC-EBeam-PDK, KLayout implementation)<a href="https://github.com/siepic/SiEPIC_EBeam_PDK/wiki/Installation-instructions"> installation instructions</a>. 
 
 ## Submission via GitHub
- 
+ - [Watch this video for a demonstration](https://kaltura.clemson.edu/media/t/1_iwysnxub)
  - Create an account on GitHub
  - Fork a copy of this GitHub repository into your own account:  <a href="../../fork">Create a new fork</a>.
  - Turn on the GitHub Actions on your forked repository: <a href="../../actions">Actions</a> (In your repository's page on GitHub, click on Actions in the top-menu bar, and Enable the workflows).

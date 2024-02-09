@@ -1,6 +1,6 @@
 '''
 --- Fabry Perot cavity using Bragg gratings and long multi-mode waveguides ---
-
+ 
 by Lukas Chrostowski, 2023
 
 Simple script to

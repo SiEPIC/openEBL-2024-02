@@ -108,10 +108,12 @@ jobs:
           # git add all produced oas/gds files
           for file in $OUTPUT_FILES; do
             git add "submissions/$file"
-            echo "git add $file"
+            echo "done: git add $file"
           done
 
           git commit -m "Add oas and gds files produced from .py files" 
+          echo "done: git commit"
           git push
+          echo "done: git push"
         if: github.event_name != 'pull_request'
 

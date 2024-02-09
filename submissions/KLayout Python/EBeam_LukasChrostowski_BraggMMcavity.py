@@ -117,7 +117,7 @@ for i in range(0,4):
     # Waveguides:
     connect_pins_with_waveguide(instGC3, 'opt1', instY1, 'opt3', waveguide_type=waveguide_type)
     connect_pins_with_waveguide(instGC2, 'opt1', instY1, 'opt2', waveguide_type=waveguide_type, turtle_B=[5,90,5,-90])
-    connect_pins_with_waveguide(instGC1, 'opt1', instBragg2, 'opt1', waveguide_type=waveguide_type, turtle_B=[5,90,5,-90,20,90])
+    connect_pins_with_waveguide(instGC1, 'opt1', instBragg2, 'opt1', waveguide_type=waveguide_type, turtle_B=[5,90,10,-90,20,90])
     connect_pins_with_waveguide(instY1, 'opt1', instBragg1, 'opt1', waveguide_type=waveguide_type,turtle_B=[5,-90])
     
 

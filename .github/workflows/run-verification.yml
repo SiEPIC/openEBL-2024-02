@@ -133,6 +133,7 @@ jobs:
           done
 
           echo "files_with_errors=$files_with_errors" >> $GITHUB_ENV
+          echo "output=$output" >> $GITHUB_ENV
 
       - name: move output lyrdb files to new folder
         run: |

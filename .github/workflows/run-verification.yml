@@ -133,7 +133,8 @@ jobs:
             echo "Done verification on $file"
           done
 
-          echo "files_with_errors=$files_with_errors, verification_output=$output" >> $GITHUB_ENV
+          echo "$output" > verification_output.txt
+          echo "files_with_errors=$files_with_errors" >> $GITHUB_ENV
 
       - name: move output lyrdb files to new folder
         run: |
@@ -157,7 +158,7 @@ jobs:
           if [ -z "$files_with_errors" ]; then
             echo "No errors detected."
           else
-            echo "$verification_output"
+            cat verification_output.txt
             echo "Errors detected: $files_with_errors"
             exit 1
           fi

@@ -59,7 +59,7 @@ jobs:
             echo "Getting oas/gds output for $file"
 
             # run file and generate a gds / oas output
-#            python "submissions/KLayout Python/$file" 
+            # python "submissions/KLayout Python/$file" 
             python "$file" 
 
             # get output and save to OUTPUT_FILES

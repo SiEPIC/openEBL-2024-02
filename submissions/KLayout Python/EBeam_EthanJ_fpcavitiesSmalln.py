@@ -193,27 +193,12 @@ def fp_cavities():
     
 ly, cell = fp_cavities()
 
-# Verify
-#num_errors = layout_check(cell=cell, verbose=False, GUI=True)
-#print('Number of errors: %s' % num_errors)
+# Zoom out
+zoom_out(cell)
 
-# Export for fabrication, removing PCells
+# Save
 path = os.path.dirname(os.path.realpath(__file__))
 filename = os.path.splitext(os.path.basename(__file__))[0]
-if export_type == 'static':
-    file_out = export_layout(cell, path, filename, relative_path = '..', format='oas', screenshot=True)
-else:
-    file_out = os.path.join(path,'..',filename+'.oas')
-    ly.write(file_out)
-
-#from SiEPIC.verification import layout_check
-#print('SiEPIC_EBeam_PDK: example_Ring_resonator_sweep.py - verification')
-#file_lyrdb = os.path.join(path,filename+'.lyrdb')
-#num_errors = layout_check(cell = cell, verbose=False, GUI=True, file_rdb=file_lyrdb)
-
-# Display the layout in KLayout, using KLayout Package "klive", which needs to be installed in the KLayout Application
-if Python_Env == 'Script':
-    from SiEPIC.utils import klive
-    klive.show(file_out, lyrdb_filename=file_lyrdb, technology=tech_name)
+file_out = export_layout(cell, path, filename, relative_path = '..', format='oas', screenshot=False)
 
 print('layout script done')

@@ -38,7 +38,7 @@ jobs:
 
           # get added/modified py files
           if [ "${{ github.event_name }}" == "push" ]; then
-            FILES=$(git diff --name-only --diff-filter=ACM ${{ github.event.before }} ${{ github.sha }} -- "submissions/KLayout Python" | grep -E '\.py$')
+            FILES=$(git diff --name-only --diff-filter=ACM ${{ github.event.before }} ${{ github.sha }} -- "submissions/KLayout Python" | grep -E '\.py$' | sed 's|^submissions/KLayout Python/||')
           else
             FILES=$(git diff --name-only --diff-filter=ACM FETCH_HEAD -- "submissions/KLayout Python" | grep -i -E '\.py$' | sed 's|^submissions/KLayout Python/||')
           fi

@@ -127,6 +127,7 @@ jobs:
             # if file results in verification errors add to string files_with_errors
             if [[ "$errors_from_output" -ge 1 ]]; then
               files_with_errors+="$file, $errors_from_output errors. "
+              echo "$output"
             fi
 
             echo "Done verification on $file"

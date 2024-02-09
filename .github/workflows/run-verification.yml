@@ -71,7 +71,7 @@ jobs:
           if [ "${{ github.event_name }}" == "workflow_run" ]; then
             FILES=$(ls ./binary_files)
           else
-            if [ "${{ github.event_name }}" = "pull_request" ]; then
+            if [[ "${{ github.event_name }}" == "pull_request" || "${{ github.event_name }}" == "pull_request_target" ]]; then
               # triggered on pull request, get all changed / added files from forked repo
               FILES=$(git diff --name-only --diff-filter=ACM FETCH_HEAD | grep -i -E '\.(gds|oas)$' | sed 's|^submissions/||')
             else
@@ -126,12 +126,14 @@ jobs:
 
             # if file results in verification errors add to string files_with_errors
             if [[ "$errors_from_output" -ge 1 ]]; then
+              echo "$output"
               files_with_errors+="$file, $errors_from_output errors. "
             fi
 
             echo "Done verification on $file"
           done
 
+          echo "$output" > verification_output.txt
           echo "files_with_errors=$files_with_errors" >> $GITHUB_ENV
 
       - name: move output lyrdb files to new folder
@@ -156,6 +158,7 @@ jobs:
           if [ -z "$files_with_errors" ]; then
             echo "No errors detected."
           else
+            cat verification_output.txt
             echo "Errors detected: $files_with_errors"
             exit 1
           fi

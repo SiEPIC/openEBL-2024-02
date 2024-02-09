@@ -14,7 +14,7 @@ pip install required packages:
 '''
 
 designer_name = 'EthanJ'
-top_cell_name = 'EBeam_%s_cavitiesN1' % designer_name
+top_cell_name = 'EBeam_%s_cavitiesN3' % designer_name
 export_type = 'PCell'  # static: for fabrication, PCell: include PCells in file
 
 import pya
@@ -56,7 +56,7 @@ def fp_cavities():
     
     # Configure parameter sweep  
     pol = 'TE'
-    sweep_n = [2, 5, 8, 10, 13, 15, 18, 20, 25]
+    sweep_n = [75, 80, 90, 100, 115, 130, 150, 175, 200]
     #sweep_gap    = [0.07, 0.07, 0.08, 0.09, 0.07, 0.08, 0.09, 0.10, 0.11]
     period = 0.280
     cavity_length = 50*1000

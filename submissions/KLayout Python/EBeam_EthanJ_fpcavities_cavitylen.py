@@ -14,7 +14,7 @@ pip install required packages:
 '''
 
 designer_name = 'EthanJ'
-top_cell_name = 'EBeam_%s_cavitiesN1' % designer_name
+top_cell_name = 'EBeam_%s_cavitiesL1' % designer_name
 export_type = 'PCell'  # static: for fabrication, PCell: include PCells in file
 
 import pya
@@ -56,11 +56,13 @@ def fp_cavities():
     
     # Configure parameter sweep  
     pol = 'TE'
-    sweep_n = [2, 5, 8, 10, 13, 15, 18, 20, 25]
+    sweep_n = [75, 75, 75, 75, 75, 75, 75, 75, 75]
     #sweep_gap    = [0.07, 0.07, 0.08, 0.09, 0.07, 0.08, 0.09, 0.10, 0.11]
+    sweep_cavity_length = [10000, 15000, 20000, 30000, 50000, 65000, 80000, 100000, 150000]
+    #cavity_length = 50*1000
+    sweep_taper_length_um = [5, 5, 10, 10, 20, 20, 20, 20, 20]
+    #taper_length_um = 20
     period = 0.280
-    cavity_length = 50*1000
-    taper_length_um = 20
     
     '''
     Create a new layout using the EBeam technology,
@@ -96,11 +98,6 @@ def fp_cavities():
     GC_pitch = 127
     
     #cell_terminator = ly.create_cell("ebeam_terminator_te1310", "EBeam")
-    
-    cell_taper_cavity = ly.create_cell('ebeam_taper_te1550', "EBeam", {
-        'wg_width1': 0.350,
-        'wg_width2': 2.000,
-        'wg_length': taper_length_um})
         
     cell_y = ly.create_cell('ebeam_y_1310', 'EBeam_Beta')
 
@@ -116,7 +113,8 @@ def fp_cavities():
         
         # get the parameters
         n = sweep_n[i]
-        p = period
+        c = sweep_cavity_length[i]
+        l = sweep_taper_length_um[i]
         
         # Grating couplers, Ports 0, 1, 2, 3 (from the bottom up)
         instGCs = []
@@ -130,7 +128,7 @@ def fp_cavities():
         
         # Label for automated measurements, laser on Port 2, detectors on Ports 1, 3, 4
         t = Trans(Trans.R90, to_itype(x,dbu), to_itype(GC_pitch*2,dbu))
-        text = Text ("opt_in_%s_1310_device_%s_FPn%sp%s" % (pol.upper(), designer_name,n,int(round(p*1000))), t)
+        text = Text ("opt_in_%s_1310_device_%s_FPn%sp%slen%s" % (pol.upper(), designer_name,n,int(round(period*1000)), int(round(c/1000))), t)
         text.halign = 1
         cell.shapes(TextLayerN).insert(text).text_size = 5/dbu
 
@@ -138,10 +136,15 @@ def fp_cavities():
 
         cell_bragg = ly.create_cell('ebeam_bragg_te1550', "EBeam", {
           'number_of_periods': n,
-          'grating_period': p,
+          'grating_period': period,
           'corrugation_width': 0.07,
           'wg_width': 0.350,
           'sinusoidal': True})
+
+        cell_taper_cavity = ly.create_cell('ebeam_taper_te1550', "EBeam", {
+          'wg_width1': 0.350,
+          'wg_width2': 2.000,
+          'wg_length': l})
 
         if i == 0:
             inst_y = connect_cell(instGCs[2], 'opt1', cell_y, 'opt1')
@@ -156,7 +159,7 @@ def fp_cavities():
         inst_taper_cavity1 = connect_cell(inst_bragg1, 'pin2', cell_taper_cavity, 'pin1')
         
         inst_taper_cavity2 = connect_cell(inst_taper_cavity1, 'pin1', cell_taper_cavity, 'pin1')
-        inst_taper_cavity2.transform(Trans(0, -cavity_length))
+        inst_taper_cavity2.transform(Trans(0, -c))
         
         inst_bragg2 = connect_cell(inst_taper_cavity2, 'pin1', cell_bragg, 'pin2')
                   

@@ -14,7 +14,7 @@ pip install required packages:
 '''
 
 designer_name = 'EthanJ'
-top_cell_name = 'EBeam_%s_cavitiesN1' % designer_name
+top_cell_name = 'EBeam_%s_cavitiesP1' % designer_name
 export_type = 'PCell'  # static: for fabrication, PCell: include PCells in file
 
 import pya
@@ -56,9 +56,9 @@ def fp_cavities():
     
     # Configure parameter sweep  
     pol = 'TE'
-    sweep_n = [2, 5, 8, 10, 13, 15, 18, 20, 25]
+    sweep_n = [75, 75, 75, 75,   25, 25, 25, 25, 25]
     #sweep_gap    = [0.07, 0.07, 0.08, 0.09, 0.07, 0.08, 0.09, 0.10, 0.11]
-    period = 0.280
+    sweep_period = [0.26, 0.27, 0.28, 0.29,   0.26, 0.27, 0.28, 0.29, 0.30]
     cavity_length = 50*1000
     taper_length_um = 20
     
@@ -106,7 +106,7 @@ def fp_cavities():
 
     # Loop through the parameter sweep
     #for i in range(len(sweep_gap)):
-    for i in range(len(sweep_n)):
+    for i in range(len(sweep_period)):
         # place layout at location:
         if i==0:
             x=0
@@ -116,7 +116,7 @@ def fp_cavities():
         
         # get the parameters
         n = sweep_n[i]
-        p = period
+        p = sweep_period[i]
         
         # Grating couplers, Ports 0, 1, 2, 3 (from the bottom up)
         instGCs = []

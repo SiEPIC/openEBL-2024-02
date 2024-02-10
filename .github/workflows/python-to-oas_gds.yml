@@ -38,7 +38,7 @@ jobs:
 
           # get added/modified py files
           if [ "${{ github.event_name }}" == "push" ]; then
-            FILES=$(git diff --name-only --diff-filter=ACM ${{ github.event.before }} ${{ github.sha }} -- "submissions/KLayout Python" | grep -E '\.py$')
+            FILES=$(git diff --name-only --diff-filter=ACM ${{ github.event.before }} ${{ github.sha }} -- "submissions/KLayout Python" | grep -E '\.py$' | sed 's|^submissions/KLayout Python/||')
           else
             FILES=$(git diff --name-only --diff-filter=ACM FETCH_HEAD -- "submissions/KLayout Python" | grep -i -E '\.py$' | sed 's|^submissions/KLayout Python/||')
           fi
@@ -60,6 +60,8 @@ jobs:
 
             # run file and generate a gds / oas output
             python "submissions/KLayout Python/$file" 
+            # Lukas: for some reason, the "submissions/KLayout" part was showing up twice, and now it isn't.
+            # python "$file" 
 
             # get output and save to OUTPUT_FILES
             gds_files=$(find submissions -type f -name "*.gds" -exec basename {} .gds \;)
@@ -107,10 +109,12 @@ jobs:
           # git add all produced oas/gds files
           for file in $OUTPUT_FILES; do
             git add "submissions/$file"
-            echo "git add $file"
+            echo "done: git add $file"
           done
 
           git commit -m "Add oas and gds files produced from .py files" 
+          echo "done: git commit"
           git push
+          echo "done: git push"
         if: github.event_name != 'pull_request'
 

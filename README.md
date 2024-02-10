@@ -3,7 +3,6 @@
 
 - The Canadian Silicon Photonics Foundry, <a href="https://siepic.ca/fabrication/">SiEPICfab</a>, presents the open electron beam lithography (EBL) fabrication process, where former and current students of <a href="https://siepic.ca/education/">SiEPIC</a> workshops and courses can submit their design for manufacturing and testing.
 - More details about <a href="https://siepic.ca/openEBL/">openEBL</a>.
-- Slides: <a href="https://docs.google.com/presentation/d/18B8UAUWxal7vW1-bIIp5o7Mb6nLZ9Ep64zdLF2bcjPQ">link</a>
 
 # Fabrication process: Passive Silicon
 ## Technical summary:
@@ -33,7 +32,7 @@ The submission involves several steps. First, you need to create your design(s) 
  - Design tools and process design kit (SiEPIC-EBeam-PDK, KLayout implementation)<a href="https://github.com/siepic/SiEPIC_EBeam_PDK/wiki/Installation-instructions"> installation instructions</a>. 
 
 ## Submission via GitHub
- 
+ - [Watch this video for a demonstration](https://kaltura.clemson.edu/media/t/1_iwysnxub)
  - Create an account on GitHub
  - Fork a copy of this GitHub repository into your own account:  <a href="../../fork">Create a new fork</a>.
  - Turn on the GitHub Actions on your forked repository: <a href="../../actions">Actions</a> (In your repository's page on GitHub, click on Actions in the top-menu bar, and Enable the workflows).
@@ -42,6 +41,7 @@ The submission involves several steps. First, you need to create your design(s) 
    - EBeam_username.oas: for the <a href="https://www.edx.org/learn/engineering/university-of-british-columbia-silicon-photonics-design-fabrication-and-data-ana">edX Phot1x silicon photonics design course</a>
    - ELEC413_username.oas: for the <a href="https://ece.ubc.ca/courses/elec-413/">UBC ELEC 413 course</a>
    - SiEPIC_Passives_username.oas: for the <a href="https://www.cmc.ca/passive-silicon-photonics-fabrication-workshop-2023">CMC SiEPIC Passives silicon photonics workshop</a>
+   - openEBL_username.gds: for past participants in the above courses
    - For example: EBeam_LukasChrostowski_rings.oas
  - Upload your design(s) into the "submissions" folder, as a binary file, namely a .gds (GDSII format) or .oas (OASIS format) file. 
     - This can be done via the GitHub web page, by navigating to the <a href=../../tree/main/submissions>submissions folder</a>, then clicking on Add file, and Upload files. 
@@ -50,17 +50,19 @@ The submission involves several steps. First, you need to create your design(s) 
  - Alternatively upload your Python file, which will be compiled by a GitHub Action.  
    - For KLayout designs, use the "submissions/KLayout Python" folder, namely a .py (Python format) file.  e.g., EBeam_LukasChrostowski_MZI.py.  The Python file should save a gds or oas file into the parent "submissions" folder. The Python script needs to be executable in non-GUI mode, namely using "import klayout SiEPIC SiEPIC-EBeam-PDK"
  - Create a <a href="https://help.github.com/articles/using-pull-requests/">Pull Request</a> -- this will notify the team of your contribution, which we can aggregate into the main design file
- - Return to the main repository, and ensure that your design is correctly merged
+ - Return to the main repository, and ensure that your design is correctly merged. Download the Latest Merge file, below.
+
+<img width="1281" alt="image" src="https://github.com/SiEPIC/openEBL-2024-02/assets/15843200/e4785a27-b971-4a64-8796-1e351f30c00e">
 
 ## Automated GitHub Actions
-
-1) Running the files in the "submissions/KLayout Python" folder, to generate the designs
+Optional: The verification and merging is performed using GitHub actions. The repository implements the following:
+1) Running the Python files in the "submissions/KLayout Python" folder, to generate the designs
 2) Performing Manufacturing DRC verification on the designs in the "submissions" folder, and outputing the errors as an Artifact
 3) Performing Functional verification on the designs in the "submissions" folder, and outputing the errors as an Artifact
-4) Merging the designs from the "submissions" folder, and outputing merged layout as an Artifact
+4) Merging the designs from the "submissions" folder, and outputing merged layout as an Artifact in the main repository
 
 ## Latest Merge Layout File
 
 <!-- start-link -->
-https://github.com/SiEPIC/openEBL-2024-02/actions/runs/7717637992/artifacts/1206952257
+https://github.com/SiEPIC/openEBL-2024-02/actions/runs/7851812712/artifacts/1234961554
 <!-- end-link -->

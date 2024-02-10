@@ -116,6 +116,7 @@ jobs:
       # merge script always runs on any PR, this ensures link is only updated after a PR is merged into SiEPIC
       - name: commit and push changes to README if we are in SiEPIC repo
         run: |
+          git pull origin main
           git diff
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"
           git config --local user.name "${{ github.actor }}"

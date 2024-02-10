@@ -32,7 +32,7 @@ The submission involves several steps. First, you need to create your design(s) 
  - Design tools and process design kit (SiEPIC-EBeam-PDK, KLayout implementation)<a href="https://github.com/siepic/SiEPIC_EBeam_PDK/wiki/Installation-instructions"> installation instructions</a>. 
 
 ## Submission via GitHub
- 
+ - [Watch this video for a demonstration](https://kaltura.clemson.edu/media/t/1_iwysnxub)
  - Create an account on GitHub
  - Fork a copy of this GitHub repository into your own account:  <a href="../../fork">Create a new fork</a>.
  - Turn on the GitHub Actions on your forked repository: <a href="../../actions">Actions</a> (In your repository's page on GitHub, click on Actions in the top-menu bar, and Enable the workflows).
@@ -64,5 +64,5 @@ Optional: The verification and merging is performed using GitHub actions. The re
 ## Latest Merge Layout File
 
 <!-- start-link -->
-https://github.com/SiEPIC/openEBL-2024-02/actions/runs/7789978710/artifacts/1221507130
+https://github.com/SiEPIC/openEBL-2024-02/actions/runs/7851893275/artifacts/1234972748
 <!-- end-link -->

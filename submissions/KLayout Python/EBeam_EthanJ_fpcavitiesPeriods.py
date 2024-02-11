@@ -125,12 +125,12 @@ def fp_cavities():
                 instGCs.append(0)
                 continue; # Don't create the 2nd GC
             
-            t = Trans(Trans.R0, to_itype(x,dbu), j*127/dbu)
+            t = Trans(Trans.R0, to_itype(x,dbu), j*127/dbu + 3/dbu)
             instGCs.append( cell.insert(CellInstArray(cell_ebeam_gc.cell_index(), t)) )
         
         # Label for automated measurements, laser on Port 2, detectors on Ports 1, 3, 4
         t = Trans(Trans.R90, to_itype(x,dbu), to_itype(GC_pitch*2,dbu))
-        text = Text ("opt_in_%s_1310_device_%s_FPn%sp%s" % (pol.upper(), designer_name,n,int(round(p*1000))), t)
+        text = Text ("opt_in_%s_1310_device_%s_FPPeriodn%sp%s" % (pol.upper(), designer_name,n,int(round(p*1000))), t)
         text.halign = 1
         cell.shapes(TextLayerN).insert(text).text_size = 5/dbu
 

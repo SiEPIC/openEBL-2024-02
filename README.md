@@ -54,6 +54,10 @@ The submission involves several steps. First, you need to create your design(s) 
 
 <img width="1281" alt="image" src="https://github.com/SiEPIC/openEBL-2024-02/assets/15843200/e4785a27-b971-4a64-8796-1e351f30c00e">
 
+## Black-box cells (IP Replacement)
+- We perform IP replacement on several cells (grating couplers). We call these cells Black Box (BB), and you can identify them by _BB in the cell name, or the presence of the Blackbox layer 998/0 in the cell.
+- You must not change the name of the cell, the contents, nor cell origins. Otherwise, the replacement will not work correctly.
+
 ## Automated GitHub Actions
 Optional: The verification and merging is performed using GitHub actions. The repository implements the following:
 1) Running the Python files in the "submissions/KLayout Python" folder, to generate the designs

@@ -133,10 +133,16 @@ top_cell.insert(CellInstArray(cell_date.cell_index(), t))
 # Origins for the layouts
 x,y = 0,cell_Height+cell_Gap_Height
 
+import subprocess
+import pandas as pd
 for f in [f for f in files_in if '.oas' in f.lower() or '.gds' in f.lower()]:
-    filedate = datetime.fromtimestamp(os.path.getmtime(f)).strftime("%Y%m%d_%H%M")
-    log("\nLoading: %s, dated %s" % (os.path.basename(f), filedate))
     basefilename = os.path.basename(f)
+    # get the time the file was last updated from the Git repository 
+    a = subprocess.run(['git', '-C', os.path.dirname(f), 'log', '-1', '--pretty=%ci',  basefilename], stdout = subprocess.PIPE) 
+    filedate = pd.to_datetime(str(a.stdout.decode("utf-8"))).strftime("%Y%m%d_%H%M")
+    log("\nLoading: %s, dated %s" % (os.path.basename(f), filedate))
+    # rather than getting it from the disk, which is not correct:
+    #  filedate = datetime.fromtimestamp(os.path.getmtime(f)).strftime("%Y%m%d_%H%M")
   
     # Load layout  
     layout2 = pya.Layout()

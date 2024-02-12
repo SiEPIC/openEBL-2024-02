@@ -304,9 +304,7 @@ coords_file.close()
 # move layers
 for i in range(0,len(layers_move)):
     layer1=layout.find_layer(*layers_move[i][0])
-    print(layer1)
     layer2=layout.find_layer(*layers_move[i][1])
-    print(layer2)
     layout.move_layer(layer1, layer2)
 
 # Export as-is layout, for UW fabrication

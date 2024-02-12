@@ -1,5 +1,5 @@
 SiEPIC-Tools 0.5.4, layout merge, running KLayout 0.28.12 
-Date: 2024-02-10, 22:44:25 local time
+Date: 2024-02-11, 20:15:10 local time
 
 Loading: EBEAM_CAROBUS.gds, dated 20240209_2058
   - course name: edXphot1x
@@ -2798,7 +2798,7 @@ Loading: ELEC413_GreyPoupon_10.oas, dated 20240210_2239
   - bounding box: (0,-26720;605000,383280)
   - Placed at position: 3678000, 836000
 
-Loading: ELEC413_GreyPoupon_11.oas, dated 20240210_2239
+Loading: ELEC413_GreyPoupon_11.oas, dated 20240211_1944
   - course name: ELEC413
   - top cell: TOP
   - loading layer: 998/0
@@ -2809,12 +2809,12 @@ Loading: ELEC413_GreyPoupon_11.oas, dated 20240210_2239
   - loading layer: 10/0
   - loading layer: 81/0
   - loading layer: 99/0
+  - measurement label: opt_in_TE_1310_ELEC413_PetervandenDoel_MYNAME558nmcavity273period50periods
+  - measurement label: opt_in_TE_1310_ELEC413_PetervandenDoel_MYNAME558nmcavity273period20periods
+  - measurement label: opt_in_TE_1310_ELEC413_PetervandenDoel_MYNAME558nmcavity272period50periods
+  - measurement label: opt_in_TE_1310_ELEC413_PetervandenDoel_MYNAME558nmcavity271period50periods
   - measurement label: opt_in_TE_1310_ELEC413_PetervandenDoel_MYNAME558nmcavity271period20periods
   - measurement label: opt_in_TE_1310_ELEC413_PetervandenDoel_MYNAME558nmcavity272period20periods
-  - measurement label: opt_in_TE_1310_ELEC413_PetervandenDoel_MYNAME558nmcavity271period50periods
-  - measurement label: opt_in_TE_1310_ELEC413_PetervandenDoel_MYNAME558nmcavity272period50periods
-  - measurement label: opt_in_TE_1310_ELEC413_PetervandenDoel_MYNAME558nmcavity273period20periods
-  - measurement label: opt_in_TE_1310_ELEC413_PetervandenDoel_MYNAME558nmcavity273period50periods
   - bounding box: (0,-26720;605000,383280)
   - Placed at position: 3678000, 1254000
 

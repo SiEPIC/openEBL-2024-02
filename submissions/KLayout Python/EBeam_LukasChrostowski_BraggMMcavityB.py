@@ -15,7 +15,7 @@ usage:
 '''
 
 designer_name = 'LukasChrostowski'
-top_cell_name = 'EBeam_%s_BraggMMcavity' % designer_name
+top_cell_name = 'EBeam_%s_BraggMMcavityB' % designer_name
 
 import pya
 from pya import *
@@ -63,7 +63,7 @@ cell_ebeam_gc = ly.create_cell('GC_TE_1310_8degOxide_BB', tech_name)
 cell_ebeam_y = ly.create_cell('ebeam_y_1310', 'EBeam_Beta')
 
 # define parameters for the designs
-params_BraggN = [40, 50, 60, 70]
+params_BraggN = [6, 7, 8, 9]
 
 for i in range(0,4):
     cell = ly.create_cell('cell%s' % i)
@@ -72,13 +72,15 @@ for i in range(0,4):
     t = Trans(Trans.R0,x,y)
     topcell.insert(CellInstArray(cell.cell_index(), t))
     
-    
-    cell_bragg = ly.create_cell('ebeam_bragg_te1310', 'EBeam_Beta', {
+    cell_bragg = ly.create_cell('BraggWaveguide_holes', 'EBeam_Beta', {
         'number_of_periods':params_BraggN[i],
-        'grating_period': 0.270,
-        'corrugation_width': 0.08,
-        'wg_width': 0.35,
-        'sinusoidal': True})
+         'grating_period':0.326, 'wg_width':0.35})
+    '''
+    cell_bragg = ly.create_cell('BraggWaveguide_holes', 'EBeam_Beta', {
+        'number_of_periods':params_BraggN[i], 
+         'grating_period':0.45, 'wg_width':0.5})
+    '''
+
     if not cell_bragg:
         raise Exception ('Cannot load Bragg grating cell; please check the script carefully.')
     
@@ -97,12 +99,12 @@ for i in range(0,4):
     instGC3 = cell.insert(CellInstArray(cell_ebeam_gc.cell_index(), t))
     
     # automated test label
-    text = Text ("opt_in_TE_1310_device_%s_BraggMMcavity%s" % (designer_name, params_BraggN[i]), t)
+    text = Text ("opt_in_TE_1310_device_%s_BraggMMcavityB%s" % (designer_name, params_BraggN[i]), t)
     cell.shapes(ly.layer(ly.TECHNOLOGY['Text'])).insert(text).text_size = 5/dbu
     
     # Y branches:
     instY1 = connect_cell(instGC3, 'opt1', cell_ebeam_y, 'opt3')
-    instY1.transform(Trans(10000,0))
+    instY1.transform(Trans(20000,0))
     
     # Bragg grating
     instBragg1 = connect_cell(instY1, 'opt1', cell_bragg, 'opt1')
@@ -116,8 +118,8 @@ for i in range(0,4):
     
     # Waveguides:
     connect_pins_with_waveguide(instGC3, 'opt1', instY1, 'opt3', waveguide_type=waveguide_type)
-    connect_pins_with_waveguide(instGC2, 'opt1', instY1, 'opt2', waveguide_type=waveguide_type, turtle_B=[5,90,5,-90])
-    connect_pins_with_waveguide(instGC1, 'opt1', instBragg2, 'opt1', waveguide_type=waveguide_type, turtle_B=[5,90,10,-90,20,90])
+    connect_pins_with_waveguide(instGC2, 'opt1', instY1, 'opt2', waveguide_type=waveguide_type, turtle_B=[15,90,5,-90])
+    connect_pins_with_waveguide(instGC1, 'opt1', instBragg2, 'opt1', waveguide_type=waveguide_type, turtle_A=[10 ,90, 100,-90], turtle_B=[5,90,10,-90,20,90])
     connect_pins_with_waveguide(instY1, 'opt1', instBragg1, 'opt1', waveguide_type=waveguide_type,turtle_B=[5,-90])
     
 

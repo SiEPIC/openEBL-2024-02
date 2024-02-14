@@ -3,6 +3,7 @@
 
 - The Canadian Silicon Photonics Foundry, <a href="https://siepic.ca/fabrication/">SiEPICfab</a>, presents the open electron beam lithography (EBL) fabrication process, where former and current students of <a href="https://siepic.ca/education/">SiEPIC</a> workshops and courses can submit their design for manufacturing and testing.
 - More details about <a href="https://siepic.ca/openEBL/">openEBL</a>.
+- This fabrication run had a deadline of February 10, 2024.
 
 # Fabrication process: Passive Silicon
 ## Technical summary:
@@ -67,7 +68,7 @@ Optional: The verification and merging is performed using GitHub actions. The re
 
 ## Latest Merge Layout File
 
-Final layout for fabrication: [D2014_02_13_EBeam.oas](raw/main/merge/D2014_02_13_EBeam.oas)
+Final layout for fabrication: [D2014_02_13_EBeam.oas](https://github.com/SiEPIC/openEBL-2024-02/raw/main/merge/D2014_02_13_EBeam.oas)
 
 <!-- start-link -->
 https://github.com/SiEPIC/openEBL-2024-02/actions/runs/7897200121/artifacts/1243840168

@@ -127,8 +127,11 @@ top_cell.insert(CellInstArray(cell_SiEPIC_Passives.cell_index(), t))
 cell_openEBL = layout.create_cell("openEBL")
 top_cell.insert(CellInstArray(cell_openEBL.cell_index(), t))
 
-# Create a date	stamp cell
-cell_date = layout.create_cell('.merged:'+now.strftime("%Y-%m-%d-%H:%M:%S"))
+# Create a date	stamp cell, and add a text label
+merge_stamp = '.merged:'+now.strftime("%Y-%m-%d-%H:%M:%S")
+cell_date = layout.create_cell(merge_stamp)
+text = Text (merge_stamp, Trans(Trans.R0, 0, 0) )
+shape = cell_date.shapes(layout.layer(10,0)).insert(text)
 top_cell.insert(CellInstArray(cell_date.cell_index(), t))   
 
 # Origins for the layouts
@@ -311,7 +314,7 @@ for i in range(0,len(layers_move)):
 log('')
 
 #export_layout (top_cell, path, filename='EBeam', relative_path='', format='gds')
-export_layout (top_cell, path, filename='EBeam', relative_path='', format='oas')
+file_out = export_layout (top_cell, path, filename='EBeam', relative_path='', format='oas')
 # log("Layout exported successfully %s: %s" % (save_options.format, file_out) )
 
 

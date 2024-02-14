@@ -1,7 +1,7 @@
 '''
 --- Fabry Perot cavity using Bragg gratings and long multi-mode waveguides ---
    
-by Lukas Chrostowski, 2024
+by Lukas Chrostowski, 2024 
  
 Simple script to
  - create a new layout with a top cell

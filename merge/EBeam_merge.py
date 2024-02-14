@@ -207,7 +207,7 @@ for f in [f for f in files_in if '.oas' in f.lower() or '.gds' in f.lower()]:
             break
 
 
-        if 'ebeam' in cell.name.lower() or num_top_cells == 1:
+        if num_top_cells == 1 or cell.name.lower() == 'top':
             log("  - top cell: %s" % cell.name)
 
             # check layout height
@@ -318,6 +318,14 @@ export_layout (top_cell, path, filename='EBeam', relative_path='', format='oas')
 log("\nExecution time: %s seconds" % int((time.time() - start_time)))
 
 log_file.close()
+
+# Display the layout in KLayout, using KLayout Package "klive", which needs to be installed in the KLayout Application
+try:
+    if Python_Env == 'Script':
+        from SiEPIC.utils import klive
+        klive.show(file_out, technology=tech_name)
+except:
+    pass
 
 print("KLayout EBeam_merge.py, completed in: %s seconds" % int((time.time() - start_time)))
 

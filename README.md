@@ -73,3 +73,5 @@ Final layout for fabrication: [D2014_02_13_EBeam.oas](https://github.com/SiEPIC/
 <!-- start-link -->
 https://github.com/SiEPIC/openEBL-2024-02/actions/runs/7897200121/artifacts/1243840168
 <!-- end-link -->
+## Measurement Results
+The chip fabrication was completed on March 12, 2024. Subsequently, the chip was mounted and aligned on an automated PIC measurement station. The passive measurement result of the chip can be found [here](https://qdot-nexus.phas.ubc.ca:25683/s/4acfSQTcCeKXSY4).
